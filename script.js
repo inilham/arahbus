@@ -3,7 +3,7 @@ function getTransferIcon(type) {
     switch (type) {
         case 'LRT': {
             const img = document.createElement('img');
-            img.src = '/img/lrt-jak-ns.png';
+            img.src = 'img/lrt-jak-ns.png';
             img.alt = 'LRT Jakarta Lin Selatan';
             img.width = 16;
             img.height = 16;
@@ -12,7 +12,7 @@ function getTransferIcon(type) {
             };
         case 'LRT-CB': {
             const img = document.createElement('img');
-            img.src = '/img/lrt-cb-line.png';
+            img.src = 'img/lrt-cb-line.png';
             img.alt = 'LRT Jabodebek Lin Cibubur';
             img.width = 16;
             img.height = 16;
@@ -21,7 +21,7 @@ function getTransferIcon(type) {
             };
         case 'LRT-BK': {
             const img = document.createElement('img');
-            img.src = '/img/lrt-bk-line.png';
+            img.src = 'img/lrt-bk-line.png';
             img.alt = 'LRT Jabodebek Lin Bekasi';
             img.width = 16;
             img.height = 16;
@@ -30,7 +30,7 @@ function getTransferIcon(type) {
             };
         case 'MRT': {
             const img = document.createElement('img');
-            img.src = '/img/mrt-ns-line.png';
+            img.src = 'img/mrt-ns-line.png';
             img.alt = 'MRT Icon';
             img.width = 16;
             img.height = 16;
@@ -39,7 +39,7 @@ function getTransferIcon(type) {
             };
         case 'Train': {
             const img = document.createElement('img');
-            img.src = '/img/train-station.png';
+            img.src = 'img/train-station.png';
             img.alt = 'Train Icon';
             img.width = 16;
             img.height = 16;
@@ -48,7 +48,7 @@ function getTransferIcon(type) {
             };
         case 'CL-Airport': {
             const img = document.createElement('img');
-            img.src = '/img/krl-a-line.png';
+            img.src = 'img/krl-a-line.png';
             img.alt = 'KA Bandara Soekarno Hatta';
             img.width = 16;
             img.height = 16;
@@ -57,7 +57,7 @@ function getTransferIcon(type) {
             };
         case 'CL-Bogor': {
             const img = document.createElement('img');
-            img.src = '/img/krl-b-line.png';
+            img.src = 'img/krl-b-line.png';
             img.alt = 'KRL Komuter Lin Bogor';
             img.width = 16;
             img.height = 16;
@@ -66,7 +66,7 @@ function getTransferIcon(type) {
             };
         case 'CL-Cikarang': {
             const img = document.createElement('img');
-            img.src = '/img/krl-c-line.png';
+            img.src = 'img/krl-c-line.png';
             img.alt = 'KRL Komuter Lin Lingkar Cikarang';
             img.width = 16;
             img.height = 16;
@@ -75,7 +75,7 @@ function getTransferIcon(type) {
             };
         case 'CL-Rangkas': {
             const img = document.createElement('img');
-            img.src = '/img/krl-r-line.png';
+            img.src = 'img/krl-r-line.png';
             img.alt = 'KRL Komuter Lin Rangkasbitung';
             img.width = 16;
             img.height = 16;
@@ -84,7 +84,7 @@ function getTransferIcon(type) {
             };
         case 'CL-Tangerang': {
             const img = document.createElement('img');
-            img.src = '/img/krl-t-line.png';
+            img.src = 'img/krl-t-line.png';
             img.alt = 'KRL Komuter Lin Tangerang';
             img.width = 16;
             img.height = 16;
@@ -93,7 +93,7 @@ function getTransferIcon(type) {
             };
         case 'CL-TP': {
             const img = document.createElement('img');
-            img.src = '/img/krl-tp-line.png';
+            img.src = 'img/krl-tp-line.png';
             img.alt = 'KRL Komuter Lin Tanjung Priok';
             img.width = 16;
             img.height = 16;
@@ -102,7 +102,7 @@ function getTransferIcon(type) {
             };
         case 'Airport': {
             const img = document.createElement('img');
-            img.src = '/img/airport.png';
+            img.src = 'img/airport.png';
             img.alt = 'Bandara';
             img.width = 16;
             img.height = 16;
@@ -111,7 +111,7 @@ function getTransferIcon(type) {
             };
         case 'Terminal': {
             const img = document.createElement('img');
-            img.src = '/img/bus-terminal.png';
+            img.src = 'img/bus-terminal.png';
             img.alt = 'Terminal Bus Icon';
             img.width = 16;
             img.height = 16;
@@ -849,6 +849,51 @@ function toggleClearButton(inputElement, buttonElement) {
     }
 }
 
+// --- Gemini API Integration ---
+async function generateRouteDescription(route) {
+    loadingIndicator.classList.remove('hidden');
+    descriptionText.textContent = ''; // Clear previous text
+    routeDescriptionOutput.classList.remove('hidden'); // Show the container
+
+    const prompt = `Generate a concise and engaging description for the following bus route in Jakarta:
+    Route Number: ${route.number}
+    Origin: ${route.origin}
+    Destination: ${route.destination}
+    Outbound Stops (first 3-5 if available): ${route.stops.outbound.slice(0, 5).map(s => s.name).join(', ')}
+    Inbound Stops (first 3-5 if available, reversed for context): ${[...route.stops.inbound].reverse().slice(0, 5).map(s => s.name).join(', ')}
+
+    Focus on what makes this route interesting, key landmarks it passes, or general areas it connects. Keep it under 150 words.`;
+
+    let chatHistory = [];
+    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+    const payload = { contents: chatHistory };
+    const apiKey = ""; // Canvas will automatically provide this in runtime
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+
+        if (result.candidates && result.candidates.length > 0 &&
+            result.candidates[0].content && result.candidates[0].content.parts &&
+            result.candidates[0].content.parts.length > 0) {
+            const text = result.candidates[0].content.parts[0].text;
+            descriptionText.textContent = text;
+        } else {
+            descriptionText.textContent = 'Failed to generate description. Please try again.';
+            console.error('Gemini API response structure unexpected:', result);
+        }
+    } catch (error) {
+        descriptionText.textContent = 'Error generating description. Please check your network connection.';
+        console.error('Error calling Gemini API:', error);
+    } finally {
+        loadingIndicator.classList.add('hidden');
+    }
+}
 
 // Event listener for input on the homepage search bar
 searchInputHome.addEventListener('input', (event) => {
