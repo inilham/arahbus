@@ -222,8 +222,6 @@ function showHomepage() {
     searchInputHome.value = '';
     suggestionsListHome.classList.add('hidden');
     clearButtonHome.classList.add('hidden');
-    routeDescriptionOutput.classList.add('hidden');
-    descriptionText.textContent = '';
     mobileMenu.classList.add('hidden'); // Ensure mobile menu is hidden
     document.body.classList.remove('overflow-hidden'); // Ensure body can scroll
     console.log('Showing homepage');
@@ -849,51 +847,6 @@ function toggleClearButton(inputElement, buttonElement) {
     }
 }
 
-// --- Gemini API Integration ---
-async function generateRouteDescription(route) {
-    loadingIndicator.classList.remove('hidden');
-    descriptionText.textContent = ''; // Clear previous text
-    routeDescriptionOutput.classList.remove('hidden'); // Show the container
-
-    const prompt = `Generate a concise and engaging description for the following bus route in Jakarta:
-    Route Number: ${route.number}
-    Origin: ${route.origin}
-    Destination: ${route.destination}
-    Outbound Stops (first 3-5 if available): ${route.stops.outbound.slice(0, 5).map(s => s.name).join(', ')}
-    Inbound Stops (first 3-5 if available, reversed for context): ${[...route.stops.inbound].reverse().slice(0, 5).map(s => s.name).join(', ')}
-
-    Focus on what makes this route interesting, key landmarks it passes, or general areas it connects. Keep it under 150 words.`;
-
-    let chatHistory = [];
-    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-    const payload = { contents: chatHistory };
-    const apiKey = ""; // Canvas will automatically provide this in runtime
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-        const result = await response.json();
-
-        if (result.candidates && result.candidates.length > 0 &&
-            result.candidates[0].content && result.candidates[0].content.parts &&
-            result.candidates[0].content.parts.length > 0) {
-            const text = result.candidates[0].content.parts[0].text;
-            descriptionText.textContent = text;
-        } else {
-            descriptionText.textContent = 'Failed to generate description. Please try again.';
-            console.error('Gemini API response structure unexpected:', result);
-        }
-    } catch (error) {
-        descriptionText.textContent = 'Error generating description. Please check your network connection.';
-        console.error('Error calling Gemini API:', error);
-    } finally {
-        loadingIndicator.classList.add('hidden');
-    }
-}
 
 // Event listener for input on the homepage search bar
 searchInputHome.addEventListener('input', (event) => {
@@ -947,16 +900,6 @@ document.addEventListener('click', (event) => {
     if (!searchInputDetail.contains(event.target) && !suggestionsListDetail.contains(event.target) && !clearButtonDetail.contains(event.target)) {
         suggestionsListDetail.classList.add('hidden');
         clearButtonDetail.classList.add('hidden');
-    }
-});
-
-// Event listener for the Generate Description button
-generateDescriptionButton.addEventListener('click', () => {
-    if (currentRoute) {
-        generateRouteDescription(currentRoute);
-    } else {
-        descriptionText.textContent = 'No route selected to generate a description.';
-        routeDescriptionOutput.classList.remove('hidden');
     }
 });
 
