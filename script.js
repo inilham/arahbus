@@ -207,9 +207,18 @@ let currentRoute = null; // To store the currently displayed route
 
 // Function to toggle mobile menu visibility
 function toggleMobileMenu() {
-    mobileMenu.classList.toggle('hidden');
-    // Toggle overflow-hidden on body to prevent scrolling when menu is open
-    document.body.classList.toggle('overflow-hidden');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+
+    if (mobileMenu.classList.contains('hidden')) {
+        // Menu is currently hidden, so show it
+        mobileMenu.classList.remove('hidden');
+        body.classList.add('overflow-hidden'); // Add overflow-hidden when menu opens
+    } else {
+        // Menu is currently visible, so hide it
+        mobileMenu.classList.add('hidden');
+        body.classList.remove('overflow-hidden'); // Always remove overflow-hidden when menu closes
+    }
 }
 
 // Function to show the homepage and hide other pages
@@ -236,8 +245,6 @@ function showDetailPage(route) {
     howToPayPage.style.display = 'none'; // Hide how to pay page
     currentRoute = route;
     displayRouteDetails(route);
-    routeDescriptionOutput.classList.add('hidden');
-    descriptionText.textContent = '';
     searchInputDetail.value = '';
     suggestionsListDetail.classList.add('hidden');
     clearButtonDetail.classList.add('hidden');
@@ -363,7 +370,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
             if (busTransfers.length > 0) {
                 const busTransferDiv = document.createElement('div');
                 busTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                busTransferDiv.appendChild(document.createTextNode('Transit ke '));
+                //busTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                 busTransfers.forEach((transfer, index) => {
                     const icon = getTransferIcon(transfer.type);
@@ -422,7 +429,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
             otherTransfers.forEach(transfer => {
                 const otherTransferDiv = document.createElement('div');
                 otherTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
+                //otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                 const icon = getTransferIcon(transfer.type);
                 if (icon) {
@@ -489,7 +496,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                 if (busTransfers.length > 0) {
                     const busTransferDiv = document.createElement('div');
                     busTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                    busTransferDiv.appendChild(document.createTextNode('Transit ke '));
+                    //busTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                     busTransfers.forEach((transfer, index) => {
                         const icon = getTransferIcon(transfer.type);
@@ -548,7 +555,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                 otherTransfers.forEach(transfer => {
                     const otherTransferDiv = document.createElement('div');
                     otherTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                    otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
+                    //otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                     const icon = getTransferIcon(transfer.type);
                     if (icon) {
@@ -602,7 +609,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                 if (busTransfers.length > 0) {
                     const busTransferDiv = document.createElement('div');
                     busTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                    busTransferDiv.appendChild(document.createTextNode('Transit ke '));
+                    //busTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                     busTransfers.forEach((transfer, index) => {
                         const icon = getTransferIcon(transfer.type);
@@ -661,7 +668,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                 otherTransfers.forEach(transfer => {
                     const otherTransferDiv = document.createElement('div');
                     otherTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                    otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
+                    //otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                     const icon = getTransferIcon(transfer.type);
                     if (icon) {
@@ -707,7 +714,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
             if (busTransfers.length > 0) {
                 const busTransferDiv = document.createElement('div');
                 busTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                busTransferDiv.appendChild(document.createTextNode('Transit ke '));
+                //busTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                 busTransfers.forEach((transfer, index) => {
                     const icon = getTransferIcon(transfer.type);
@@ -766,7 +773,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
             otherTransfers.forEach(transfer => {
                 const otherTransferDiv = document.createElement('div');
                 otherTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
+                //otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                 const icon = getTransferIcon(transfer.type);
                 if (icon) {
