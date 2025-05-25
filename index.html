@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arah Bus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+
+    <header class="header">
+        <div class="container mx-auto flex justify-between items-center relative h-full" style="min-height: 64px;">
+            <div>
+                <h1 id="website-name" class="text-2xl font-bold cursor-pointer flex items-center" onclick="showHomepage()">
+                    <img src="/img/bus-icon.png" alt="Bus Logo" class="h-6 w-6 mr-2">ArahBus</h1>
+                <p class="text-sm text-gray-600">Informasi Rute Bus Jakarta</p>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <nav class="hidden md:block">
+                <ul class="flex space-x-4 h-full">
+                    <li><a href="#" class="menu-button" onclick="showHowToPayPage()">Cara Naik</a></li>
+                    <li><a href="#" class="menu-button" onclick="showBusNetworkPage()">Rute Bus</a></li>
+                    <li><a href="#" class="menu-button" onclick="showAboutPage()">Tentang</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="homepage" class="flex flex-col items-center justify-center flex-grow">
+        <img src="/img/arahbus.png" alt="Icon made by Freepik from www.flaticon.com" class="mb-4" style="max-width: 75px; height: auto;">
+        <div class="w-full max-w-md relative px-2">
+            <input
+                type="text"
+                id="search-input-home"
+                class="w-full px-4 py-3 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-lg pr-10" placeholder="Ketik Nomor Bus atau Nama Halte"
+            />
+            <button id="clear-button-home" class="clear-button hidden">✕</button> 
+                <ul id="suggestions-list-home" class="absolute z-10 w-[27rem] bg-white border border-gray-300 rounded-md shadow-lg mt-2 max-h-60 overflow-y-auto hidden">
+                </ul>
+        </div>
+        <div class="search-instructions">
+            <p class="headline"><strong></strong></p>
+            <ul class="instruction-list">
+                <li>Ketik nomor bus atau nama halte.</li>
+                <li>Jika mengetik halte, klik nomor bus yang muncul.</em>.</li>
+                <li>Lihat rute busnya!</li>
+            </ul>
+            <p class="tip"></p>
+        </div>
+    </div>
+
+    <div id="detail-page" class="container mx-auto p-4 hidden flex-grow">
+        <div class="flex flex-wrap -mx-2">
+            <div class="w-full md:w-1/3 px-2 mb-4 md:mb-0">
+                <div class="bg-white h-full p-5 shadow-sm">
+                    <div class="flex justify-start mb-4">
+                        <button id="back-button" class="back-button">
+                            Kembali
+                        </button>
+                    </div>
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800">Cari rute lainnya</h2>
+                     <div class="w-full relative mb-4">
+                        <input
+                          type="text"
+                          id="search-input-detail"
+                          class="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm pr-10" placeholder="Search bus route"
+                        />
+                        <button id="clear-button-detail" class="clear-button hidden">✕</button> 
+                            <ul id="suggestions-list-detail" class="absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg mt-2 max-h-40 overflow-y-auto hidden">
+                            </ul>
+                    </div>
+                    <div>
+                        <div class="route-detail-div">
+                            <div>Bus Nomor</div>
+                            <h2 id="detail-route-number"></h2>
+                            <div class="streetbox">
+                                <span class="pull-left">
+                                Asal: <p id="detail-origin-table" style="display: inline;"></p>
+                                <br>
+                                Tujuan: <p id="detail-destination-table" style="display: inline;"></p>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-legend">
+                        <h3>Legenda</h3>
+                        <ul>
+                            <li><img src="/img/krl-a-line.png" alt="KRL Lin Bandara" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>KA Bandara Soekarno Hatta</li>
+                            <li><img src="/img/krl-b-line.png" alt="KRL Lin Bogor " style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>KRL Komuter Lin Bogor</li>
+                            <li><img src="/img/krl-c-line.png" alt="KRL Lin Lingkar Cikarang" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>KRL Komuter Lin Lingkar Cikarang</li>
+                            <li><img src="/img/mrt-ns-line.png" alt="MRT Lin Utara Selatan" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>MRT Lin Utara Selatan</li>
+                            <li><img src="/img/krl-r-line.png" alt="KRL Lin Rangkasbitung" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>KRL Komuter Lin Rangkasbitung</li>
+                            <li><img src="/img/lrt-jak-ns.png" alt="LRT Jakarta Lin Selatan" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>LRT Jakarta Lin Selatan</li>
+                            <li><img src="/img/krl-t-line.png" alt="KRL Lin Tangerang" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>KRL Komuter Lin Tangerang</li>
+                            <li><img src="/img/krl-tp-line.png" alt="KRL Lin Tanjung Priok" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>KRL Komuter Lin Tanjung Priok</li>
+                            <li><img src="/img/lrt-bk-line.png" alt="LRT Jabodebek Lin Bekasi" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>LRT Jabodebek Lin Bekasi</li>
+                            <li><img src="/img/lrt-cb-line.png" alt="LRT Jabodebek Lin Cibubur" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>LRT Jabodebek Lin Cibubur</li>
+                            <li><img src="/img/bus-terminal.png" alt="Terminal Bus" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>Terminal Bus</li>
+                            <li><img src="/img/train-station.png" alt="Stasiun Kereta" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>Stasiun Kereta</li>
+                            <li><img src="/img/halte-icon.png" alt="Halte Pemberhentian Bus" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>Halte Pemberhentian Bus</li>
+                            <li><img src="/img/arah-icon.png" alt="Arah Rute Bus" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>Arah Rute Bus</li>
+                            <li><img src="/img/dotted.png" alt="Halte di titik berbeda (perlu jalan)" style="vertical-align: middle; margin-right: 4px; width: 20px;"></span>Perlu berjalan untuk halte sebaliknya</li>
+                        </ul>
+                    </div>
+                    <button id="generate-description-button" class="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full">
+                        ✨ Generate Route Description
+                    </button>
+                    <div id="route-description-output" class="mt-4 p-3 bg-gray-50 rounded-md text-gray-700 text-sm hidden">
+                        <p id="description-text"></p>
+                        <div id="loading-indicator" class="hidden text-center text-blue-500">Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-2/3 px-2"> 
+                <div class="bg-white h-full p-5 shadow-sm">
+                    <table id="combined-stops-table" class="stops-table">
+                        <colgroup>
+                            <col class="stop">
+                            <col class="middle">
+                            <col class="stop">
+                        </colgroup>
+                        <tbody id="combined-stops-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            </div>
+
+    </div>
+
+    <div id="bus-network-page" class="container mx-auto p-4 hidden flex-grow">
+        <div class="bg-white p-6 shadow-sm">
+            <div class="flex justify-start mb-4">
+                <button id="bus-network-back-button" class="back-button">
+                    Kembali
+                </button>
+            </div>
+            <h2 class="text-2xl font-semibold mb-6 text-gray-800">Pilih rute untuk tahu ArahBus</h2>
+            <table class="bus-network-table">
+                <thead>
+                    <tr>
+                        <th>Nomor Bus</th>
+                        <th>Rute</th>
+                    </tr>
+                </thead>
+                <tbody id="bus-network-table-body">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="about-page" class="container mx-auto p-4 hidden flex-grow">
+        <div class="bg-white p-6 shadow-sm">
+            <div class="flex justify-start mb-4">
+                <button id="about-back-button" class="back-button">
+                    Kembali
+                </button>
+            </div>
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800">ArahBus: Petunjuk Bus Jakarta Ada di Genggamanmu.</h2>
+            <p class="text-gray-700">
+                Bingung naik bus di Jakarta? <strong>ArahBus</strong> hadir sebagai panduan lengkapmu! Temukan <strong>rute bus tercepat</strong>, <strong>lokasi halte terdekat</strong>, dan <strong>informasi transit</strong> dengan mudah. Rencanakan perjalananmu tanpa ribet, sampai tujuan dengan nyaman.
+            </p>
+        </div>
+    </div>
+
+    <div id="how-to-pay-page" class="container mx-auto p-4 hidden flex-grow">
+        <div class="bg-white p-6 shadow-sm">
+            <div class="flex justify-start mb-4">
+                <button id="how-to-pay-back-button" class="back-button">
+                    Kembali
+                </button>
+            </div>
+                <h2 class="text-2xl font-semibold mb-6 text-gray-800">Cara Naik dan Bayar Bus TransJakarta</h2>
+                <p class="text-gray-700">
+                    Naik bus TransJakarta sangat mudah dan nyaman. Berikut adalah cara umum untuk membayar dan menggunakan layanan bus ini:
+                </p>
+
+                ---
+
+                <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Metode Pembayaran TransJakarta</h3>
+                <ul class="list-disc list-inside text-gray-700 mt-4 ml-4">
+                    <li><strong>Kartu Uang Elektronik:</strong> Anda bisa menggunakan berbagai kartu uang elektronik seperti e-money (Bank Mandiri), Flazz (BCA), Brizzi (BRI), TapCash (BNI), dan kartu JakLingko. Cukup tempelkan kartu Anda pada alat pembaca saat masuk dan keluar bus di halte.</li>
+                    <li><strong>Aplikasi JakLingko:</strong> Unduh aplikasi resmi JakLingko di ponsel pintar Anda. Anda dapat mengisi saldo melalui aplikasi dan menggunakan kode QR untuk pembayaran. Aplikasi ini juga menyediakan pelacakan bus secara real-time dan informasi rute.</li>
+                    <li><strong>Tunai (Terbatas):</strong> Meskipun pembayaran elektronik sangat dianjurkan, beberapa rute mungkin masih menerima pembayaran tunai untuk sekali jalan. Namun, selalu disarankan untuk memiliki kartu uang elektronik atau aplikasi JakLingko untuk pengalaman yang lebih lancar.</li>
+                </ul>
+
+                ---
+
+                <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Cara Naik Bus TransJakarta</h3>
+                <ul class="list-disc list-inside text-gray-700 mt-4 ml-4">
+                    <li><strong>Pergi ke Halte TransJakarta:</strong> TransJakarta beroperasi di jalur khusus (busway) dengan halte yang dirancang khusus. Pastikan Anda berada di halte TransJakarta.</li>
+                    <li><strong>Tempel Kartu Anda:</strong> Saat memasuki area halte atau bus (tergantung sistem halte), tempelkan kartu uang elektronik Anda pada alat pembaca. Pastikan saldo Anda mencukupi.</li>
+                    <li><strong>Naik Bus:</strong> Setelah masuk, tunggu bus sesuai dengan rute yang Anda tuju. Perhatikan nomor rute dan tujuan yang tertera di bagian depan bus.</li>
+                    <li><strong>Tempel Kartu Saat Keluar:</strong> Saat tiba di halte tujuan Anda, tempelkan kembali kartu Anda pada alat pembaca sebelum keluar dari area halte. Ini penting untuk perhitungan tarif yang benar.</li>
+                </ul>
+
+                <p class="text-gray-700 mt-4">
+                    Pastikan kartu Anda memiliki saldo yang cukup sebelum naik. Lokasi isi ulang (top-up) saldo tersedia di sebagian besar halte bus dan minimarket.
+                </p>
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden fixed top-[4rem] left-0 right-0 w-full bg-white py-2 flex flex-col items-center space-y-4 z-50 shadow-lg">
+        <a href="#" class="mobile-menu" onclick="showHowToPayPage(); toggleMobileMenu();">How to Pay</a>
+        <a href="#" class="mobile-menu" onclick="showBusNetworkPage(); toggleMobileMenu();">Bus Network</a>
+        <a href="#" class="mobile-menu" onclick="showAboutPage(); toggleMobileMenu();">About Page</a>
+        <button class="absolute -top-2 right-4 text-gray-700 text-2xl" onclick="toggleMobileMenu()">✕</button>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

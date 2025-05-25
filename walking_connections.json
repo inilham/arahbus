@@ -1,0 +1,21 @@
+{
+    "Bundaran HI Astra": ["Bundaran HI", "Tosari"],
+    "Tosari": ["Bundaran HI Astra", "Dukuh Atas 1"],
+    "Monumen Nasional": ["Harmoni"],
+    "Harmoni": ["Monumen Nasional"],
+    "ASEAN": ["Kejaksaan Agung"],
+    "Kejaksaan Agung": ["ASEAN"],
+    "Gedong Panjang": ["Bandengan"],
+    "Gambir":["Gambir 2"],
+    "Tanjung Duren Arah Selatan":["Tanjung Duren Arah Utara"],
+    "Kota Bambu Arah Selatan":["Kota Bambu Arah Utara"],
+    "Kemanggisan Arah Selatan":["Kemanggisan Arah Utara"],
+    "Gerbang Pemuda Arah Timur":["Gerbang Pemuda Arah Barat"],
+    "Widya Chandra Telkomsel Arah Timur":["Widya Chandra Telkomsel Arah Barat"],
+    "Denpasar Arah Timur":["Denpasar Arah Barat"],
+    "Tegal Parang Arah Timur":["Tegal Parang Arah Barat"],
+    "Pancoran Arah Timur":["Pancoran Arah Barat"],
+    "Tebet Eco Park Arah Timur":["Tebet Eco Park Arah Barat"],
+    "Cikoko Arah Timur":["Cikoko Arah Barat"],
+    "Ciliwung Arah Timur":["Ciliwung Arah Barat"]
+}

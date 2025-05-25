@@ -1,0 +1,581 @@
+/* Custom styles for scrollbar in suggestions lists */
+.overflow-y-auto::-webkit-scrollbar {
+    width: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+/* Styling for header */
+.header {
+  background-color: #ffffff; /* Equivalent to bg-[#ffffff] */
+  color: #333333; /* Equivalent to text-gray-700 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Equivalent to shadow-lg */
+  border-bottom: 2px solid #6ab04c; /* New bottom border */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+/* Styling for the new route detail table */
+.route-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem; /* Add some space below the heading */
+    background-color: #6ab04c;
+}
+
+.route-detail-table td {
+    padding: 8px 0; /* Adjust padding as needed */
+    color: #ffffff; /* text-gray-700 */
+    font-size: 0.875rem; /* text-sm */
+}
+
+.route-detail-table td:first-child {
+    font-weight: bold; /* Make the labels bold */
+    width: 30%; /* Adjust width for labels */
+    padding-right: 10px; /* Add space between label and value */
+}
+
+.route-detail-div {
+    color: #ffffff;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    background-color: #6ab04c;
+    margin-bottom: 20px;
+    padding: 10px;
+    min-height: 100px;
+    overflow: auto;
+}
+.route-detail-div h2 {
+    font-size: 100px;
+    font-weight: 600;
+    width: 60%;
+    margin: 0;
+    padding: 0;
+}
+.route-detail-div .streetbox {
+    border-top: 1px solid #fff;
+    padding-top: 20px;
+    font-size: 16px;
+}
+.route-detail-div .streetbox .pull-left {
+    float: left;
+}
+
+/* Styling for the combined stops table */
+.stops-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.stops-table th, .stops-table td {
+    padding: 8px 12px;
+    font-size: 0.875rem; /* text-sm */
+    vertical-align: top; /* Align content to top */
+}
+
+.stops-table th {
+    background-color: #f3f4f6; /* bg-gray-100 */
+    font-weight: 600; /* font-semibold */
+    color: #4b5563; /* text-gray-600 */
+}
+
+/* Column widths */
+.stops-table col.stop {
+    width: 48%; /* Adjust width for stop columns */
+}
+.stops-table col.middle {
+    width: 4%; /* Adjust width for middle separation column */
+}
+
+/* Alternating row background for intermediate stops */
+.stops-table tr.intermediate-row:nth-child(even) {
+    background-color: #ffffff; /* bg-gray-50 for even rows */
+}
+.stops-table tr.intermediate-row:nth-child(odd) {
+    background-color: #ffffff; /* bg-white for odd rows */
+}
+
+/* Styling for edge rows (first/last stops) */
+.stops-table .edge {
+    /* background-color: #e0f2fe; /* bg-blue-100 */
+    font-weight: bold;
+    text-align: center;
+    color: #474747; /* text-blue-800 */
+}
+
+/* Specific style for the start stop TD */
+.stops-table td.stop-start { /* Applied to TD, not TR */
+    position: relative;
+    background: radial-gradient(
+        circle at bottom center,
+        transparent,
+        transparent 16px,
+        #6ab04c 16px,
+        #6ab04c 24px,
+        transparent 24px
+    ) no-repeat; /* Ensure background is centered at bottom */
+    background-size: 100% 100%; /* Make sure gradient spans the whole td */
+    padding-top: 8px; /* Standard padding */
+    padding-bottom: 30px; /* Increased padding to move text higher */
+    border-top-left-radius: 40px; /* Added top-left radius */
+    border-top-right-radius: 40px; /* Added top-right radius */
+    background-color: #cff1bf; /* Green background for start stop */
+}
+/* Specific style for the end stop TD */
+.stops-table td.stop-end { /* Applied to TD, not TR */
+    position: relative;
+    background: radial-gradient(
+        circle at top center,
+        transparent,
+        transparent 16px,
+        #6ab04c 16px,
+        #6ab04c 24px,
+        transparent 24px
+    ) no-repeat; /* Ensure background is centered at top */
+    background-size: 100% 100%; /* Make sure gradient spans the whole td */
+    padding-top: 30px; /* Increased padding to move text lower */
+    padding-bottom: 8px; /* Standard padding */
+    border-bottom-left-radius: 40px; /* Added top-left radius */
+    border-bottom-right-radius: 40px; /* Added top-right radius */
+    background-color: #cff1bf; /* Red background for end stop */
+}
+.stops-table .loop {
+    /* Style for loop routes, if applicable */
+    font-weight: bold;
+    text-align: center;
+}
+    /* Style for the middle column in opposite direction */
+.stops-table .opposite {
+    padding: 0px;
+    min-width: 32px;
+}
+.stops-table .solid-line {
+    padding: 0px;
+    min-width: 32px;
+}
+.stops-table .dotted-line {
+    padding: 0px;
+    min-width: 32px;
+    background: repeating-linear-gradient(90deg,#ff7f50,#ff7f50 2px,#0000 2px 4px) 50% / 100% 2px no-repeat;
+}
+/* New base style for intermediate cells with line background */
+.stops-table td.intermediate-line {
+    background: linear-gradient(#6ab04c, #6ab04c) no-repeat;
+    background-size: 8px 100%;
+}
+
+/* Base style for stop cells that have the ::before indicator */
+.stops-table td.stop-cell {
+    position: relative; /* Establish positioning context for ::before */
+    /* Default padding for cells, will be overridden by specific column styles */
+    padding: 8px 12px;
+}
+
+/* Styles for the pseudo-element indicator */
+.stops-table td.stop-cell::before, .stops-table .edge td::before { /* Target TD within .edge */
+    pointer-events: none;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #6ab04c;
+    background-color: #fff;
+    border-radius: 999px;
+}
+.stops-table td.stop-cell::before { /* Specific for intermediate stops */
+    top: calc(50% - 5px);
+    left: 0;
+}
+
+/* Outbound stops (first column) - text align right, indicator on right */
+.stops-table tr.intermediate-row td:first-child.stop-cell {
+    text-align: right;
+    padding-right: 25px; /* Space for the pseudo-element */
+    padding-left: 12px; /* Standard left padding */
+    vertical-align: middle;
+}
+.stops-table tr.intermediate-row td:first-child.intermediate-line {
+    background-position: right 0px top 0;
+}
+
+.stops-table tr.intermediate-row td:first-child.stop-cell::before {
+    left: auto; /* Remove left positioning */
+    right: -1px; /* Position on the right */
+    margin: 0 0 0 10px;
+}
+.stops-table tr.intermediate-row td:first-child.stop-cell::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 2px;
+    width: 4px;
+    height: 4px;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    transform: rotate(-135deg);
+    opacity: 1;
+}
+
+/* Inbound stops (third column) - text align left, indicator on left */
+.stops-table tr.intermediate-row td:last-child.stop-cell {
+    text-align: left; /* Explicitly left align */
+    padding-left: 25px; /* Space for the pseudo-element */
+    padding-right: 12px; /* Standard right padding */
+    vertical-align: middle;
+}
+.stops-table tr.intermediate-row td:last-child.intermediate-line {
+    background-position: left 0px top 0; /* Updated line */
+}
+
+.stops-table tr.intermediate-row td:last-child.stop-cell::before {
+    left: -1px; /* Position on the left */
+    right: auto; /* Remove right positioning */
+}
+.stops-table tr.intermediate-row td:last-child.stop-cell::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 2px;
+    width: 4px;
+    height: 4px;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    transform: rotate(45deg);
+    opacity: 1;
+}
+
+/* Fix for ::before on edge rows to center it */
+.stops-table .edge td::before { /* Target TD within .edge */
+    left: 50%;
+    transform: translateX(-50%); /* Only translate horizontally */
+}
+/* Specific vertical positioning for ::before on start/end TDs */
+.stops-table td.stop-start::before {
+    bottom: 15px; /* Position relative to the bottom gradient circle */
+    top: auto; /* Ensure top is not conflicting */
+}
+.stops-table td.stop-end::before {
+    top: 15px; /* Position relative to the top gradient circle */
+    bottom: auto; /* Ensure bottom is not conflicting */
+}
+/* Inbound BRT Cell to show half circle */
+.stops-table td.inbound-brt {
+    position: relative; /* Establish positioning context for ::before */
+    /* Default padding for cells, will be overridden by specific column styles */
+    padding: 8px 12px;
+}
+
+/* Styles for the pseudo-element indicator */
+.stops-table td.inbound-brt::before {
+    pointer-events: none;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 25px;
+    height: 10px;
+    border: 2px solid #6ab04c;
+    border-right: 0; /* Hides the right vertical line */
+    background-color: #fff;
+    border-radius: 999px 0 0 999px; /* Half-circle on the left side */
+    right: 0; /* Aligns to the right edge of the parent */
+    top: 50%; /* Centers vertically */
+    transform: translateY(-50%); /* Adjusts for perfect vertical centering */
+}
+.stops-table tr.intermediate-row td:first-child.inbound-brt {
+    text-align: right;
+    padding-right: 25px; /* Space for the pseudo-element */
+    padding-left: 12px; /* Standard left padding */
+    vertical-align: middle;
+}
+.stops-table tr.intermediate-row td:first-child.inbound-brt::before {
+    left: auto; /* Remove left positioning */
+    right: -16px; /* Position on the right */
+    margin: 0 0 0 10px;
+}
+.stops-table tr.intermediate-row td:first-child.inbound-brt::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 2px;
+    width: 4px;
+    height: 4px;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    transform: rotate(-135deg);
+    opacity: 1;
+}
+/* Inbound stops (third column) - text align left, indicator on left */
+.stops-table tr.intermediate-row td:last-child.inbound-brt {
+    text-align: left; /* Explicitly left align */
+    padding-left: 25px; /* Space for the pseudo-element */
+    padding-right: 12px; /* Standard right padding */
+    vertical-align: middle;
+}
+.stops-table tr.intermediate-row td:last-child.inbound-brt::before {
+    left: 0px; /* Position on the left */
+    right: auto; /* Remove right positioning */
+}
+.stops-table tr.intermediate-row td:last-child.inbound-brt::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 2px;
+    width: 4px;
+    height: 4px;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    transform: rotate(45deg);
+    opacity: 1;
+}
+/* Outbound BRT Cell to show half circle */
+.stops-table td.outbound-brt {
+    position: relative; /* Establish positioning context for ::before */
+    /* Default padding for cells, will be overridden by specific column styles */
+    padding: 8px 12px;
+}
+
+/* Styles for the pseudo-element indicator */
+.stops-table td.outbound-brt::before {
+    pointer-events: none;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 25px;
+    height: 10px;
+    border: 2px solid #6ab04c;
+    border-left: 0; /* Hides the right vertical line */
+    background-color: #fff;
+    border-radius: 0 999px 999px 0; /* Half-circle on the right side */
+    top: 50%; /* Centers vertically */
+    transform: translateY(-50%); /* Adjusts for perfect vertical centering */
+}
+.stops-table tr.intermediate-row td:first-child.outbound-brt {
+    text-align: right;
+    padding-right: 25px; /* Space for the pseudo-element */
+    padding-left: 12px; /* Standard left padding */
+    vertical-align: middle;
+}
+.stops-table tr.intermediate-row td:first-child.outbound-brt::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 2px;
+    width: 4px;
+    height: 4px;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    transform: rotate(-135deg);
+    opacity: 1;
+}
+/* outbound stops (third column) - text align left, indicator on left */
+.stops-table tr.intermediate-row td:last-child.outbound-brt {
+    text-align: left; /* Explicitly left align */
+    padding-left: 25px; /* Space for the pseudo-element */
+    padding-right: 12px; /* Standard right padding */
+    vertical-align: middle;
+}
+.stops-table tr.intermediate-row td:last-child.outbound-brt::before {
+    left: -16px; /* Position on the left */
+    right: auto; /* Remove right positioning */
+}
+.stops-table tr.intermediate-row td:last-child.outbound-brt::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 2px;
+    width: 4px;
+    height: 4px;
+    border-bottom: 2px solid #ffffff;
+    border-right: 2px solid #ffffff;
+    transform: rotate(45deg);
+    opacity: 1;
+}
+/* Styles for Back Button */
+.back-button {
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+  background-color: #dddddd; /* bg-[#dddddd] */
+  color: #333333; /* text-dark-grey */
+  border-radius: 3rem; /* rounded */
+  transition: background-color 0.2s ease-in-out; /* hover effect transition */
+}
+
+.back-button:hover {
+  background-color: #6ab04c; /* hover:bg-blue-600 */
+  color: #fff;
+}
+
+/* Styles for Menu Button */
+.menu-button {
+    position: relative; /* Needed for positioning the pseudo-element */
+    display: flex; /* Use flex to center text vertically */
+    align-items: center; /* Center text vertically */
+    padding: 1.25rem 1rem; /* Adjust horizontal padding as needed */
+    height: 100%; /* Make the link take full height of its parent (li) */
+    transition: background-color 0.3s ease; /* Smooth transition for background */
+}
+
+.menu-button:hover {
+    background-color: #6ab04c; /* Slightly dark background on hover */
+    color: #fff;
+    font-weight: 500;
+    /* You can change rgba(0,0,0,0.1) to any color you prefer, e.g., #f0f0f0 for a light gray */
+}
+
+/* Styles for the clear button */
+.clear-button {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #9ca3af; /* Tailwind gray-400 */
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    z-index: 20; /* Ensure it's above the input */
+}
+.clear-button:hover {
+    color: #6b7280; /* Tailwind gray-500 */
+}
+
+/* Styles for the bus network table */
+.bus-network-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    border-radius: 15px; /* Apply border-radius to the table */
+    overflow: hidden; /* Ensures the border-radius is visible */
+}
+.bus-network-table th, .bus-network-table td {
+    border: 1px solid #e5e7eb;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+.bus-network-table th {
+    background-color: #6ab04c; /* Header background */
+    font-weight: 600;
+    color: #ffffff; /* Header text white */
+    text-align: center;
+}
+.bus-network-table tr:nth-child(even) {
+    background-color: #ffffff;
+}
+.bus-network-table tr:hover {
+    background-color: #f9fafb;
+}
+.bus-network-table td:first-child { /* Select the first column */
+    background-color: #cff1bf; /* First column background color */
+    text-align: center;
+}
+.bus-network-table td:first-child:hover { /* Select the first column */
+    background-color: #def7d2; /* First column background color */
+    font-weight: 500;
+}
+.bus-network-table td a {
+    color: #333333; /* Tailwind blue-600 */
+    text-decoration: none;
+}
+.bus-network-table td a:hover {
+    text-decoration: underline;
+}
+/* Style for mobile menu */
+.mobile-menu {
+  display: block;
+  padding: 8px 16px; /* Adjusted padding for mobile */
+  color: #333333; /* Equivalent to text-gray-700 */
+  font-size: 16px; /* Reduced from 20px (text-xl) for better mobile fit */
+  background-color: transparent;
+  width: 100%;
+  text-align: center;
+  text-decoration: none; /* Remove default underline for links */
+  transition: background-color 0.2s ease; /* Smooth hover transition */
+}
+
+.mobile-menu:hover {
+  background-color: #6ab04c; /* Same hover background color */
+  color: #fff;
+}
+
+/* Ensure responsiveness for smaller screens */
+@media (max-width: 640px) {
+  .mobile-menu {
+    padding: 12px 16px; /* Slightly more vertical padding for touch targets */
+    font-size: 14px; /* Further adjust font size if needed */
+  }
+}
+.map-legend {
+    color: #232323;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    min-height: 100px;
+    overflow: auto;
+}
+  .map-legend h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+  .map-legend ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+  .map-legend li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+/* Style for search bar instruction */
+.search-instructions {
+    font-size: 0.875rem; /* Small, readable font size */
+    color: #6b7280; /* Subtle gray for secondary text */
+    margin-top: 0.5rem; /* Space between search bar and instructions */
+    line-height: 1.5; /* Comfortable line spacing */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Clean, system font */
+    text-align: left; /* Align with search bar */
+    max-width: 448px; /* Constrain width for readability */
+    padding: 0 1rem; /* Light padding for breathing room */
+    opacity: 0.9; /* Slightly transparent to avoid overpowering */
+}
+.search-instructions:hover {
+    opacity: 1;
+    color: #4b5563; /* Darker on hover */
+}
+.search-instructions .headline {
+    font-size: 1rem; /* Slightly larger for emphasis */
+    margin-bottom: 0.5rem; /* Space before list */
+}
+.search-instructions .instruction-list {
+    list-style-type:disc; /* Explicitly set bullet points */
+    margin: 0.5rem 0; /* Vertical spacing */
+    padding-left: 1.5rem; /* Indent for bullets */
+}
+.search-instructions .instruction-list li {
+    margin-bottom: 0.25rem; /* Space between list items */
+}
+
