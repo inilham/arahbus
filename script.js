@@ -1,15 +1,17 @@
+// script.js
+
 // Helper function to get the appropriate icon for transfer type
 function getTransferIcon(type) {
     switch (type) {
         case 'LRT': {
             const img = document.createElement('img');
-            img.src = 'img/lrt-jak-ns.png';
+            img.src = 'img/lrt-jak-ns.png'; // Assuming relative path works with base tag or for local testing
             img.alt = 'LRT Jakarta Lin Selatan';
             img.width = 16;
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'LRT-CB': {
             const img = document.createElement('img');
             img.src = 'img/lrt-cb-line.png';
@@ -18,7 +20,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'LRT-BK': {
             const img = document.createElement('img');
             img.src = 'img/lrt-bk-line.png';
@@ -27,7 +29,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'MRT': {
             const img = document.createElement('img');
             img.src = 'img/mrt-ns-line.png';
@@ -36,7 +38,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'Train': {
             const img = document.createElement('img');
             img.src = 'img/train-station.png';
@@ -45,7 +47,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'CL-Airport': {
             const img = document.createElement('img');
             img.src = 'img/krl-a-line.png';
@@ -54,7 +56,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'CL-Bogor': {
             const img = document.createElement('img');
             img.src = 'img/krl-b-line.png';
@@ -63,7 +65,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'CL-Cikarang': {
             const img = document.createElement('img');
             img.src = 'img/krl-c-line.png';
@@ -72,7 +74,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'CL-Rangkas': {
             const img = document.createElement('img');
             img.src = 'img/krl-r-line.png';
@@ -81,7 +83,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'CL-Tangerang': {
             const img = document.createElement('img');
             img.src = 'img/krl-t-line.png';
@@ -90,7 +92,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'CL-TP': {
             const img = document.createElement('img');
             img.src = 'img/krl-tp-line.png';
@@ -99,7 +101,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'Airport': {
             const img = document.createElement('img');
             img.src = 'img/airport.png';
@@ -108,7 +110,7 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
+        };
         case 'Terminal': {
             const img = document.createElement('img');
             img.src = 'img/bus-terminal.png';
@@ -117,114 +119,107 @@ function getTransferIcon(type) {
             img.height = 16;
             img.style.cssText = 'vertical-align: bottom; display: inline-block; margin-left: 2px; margin-right: 2px;';
             return img;
-            };
-        default: 
+        };
+        default:
             return null;
     }
 }
 
-let mockBusRoutes = []; // Declare as a mutable variable, will be populated from data.json
+let mockBusRoutes = [];
+let walkingConnectionsData = {};
 
-// Declare a variable to hold the loaded walking connections data
-let walkingConnectionsData = {}; //
-
-/**
- * Asynchronously loads walking connections data from an external JSON file.
- * Assumes the JSON file is named 'walking_connections.json' and is in the same directory.
- */
-async function loadWalkingConnections() { //
+async function loadWalkingConnections() {
     try {
-        const response = await fetch('walking_connections.json'); //
-        if (!response.ok) { //
-            throw new Error(`HTTP error! status: ${response.status}`); //
+        const response = await fetch('walking_connections.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        walkingConnectionsData = await response.json(); //
-        console.log("Walking connections loaded:", walkingConnectionsData); //
-    } catch (error) { //
-        console.error("Could not load walking connections:", error); //
-        // Initialize with an empty object or fallback data if loading fails
-        walkingConnectionsData = {}; //
+        walkingConnectionsData = await response.json();
+        console.log("Walking connections loaded:", walkingConnectionsData);
+    } catch (error) {
+        console.error("Could not load walking connections:", error);
+        walkingConnectionsData = {};
     }
 }
 
-// Function to fetch mock data
 async function fetchMockBusRoutes() {
     try {
-        const response = await fetch('data.json'); // Fetch data from the new JSON file
+        const response = await fetch('data.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         mockBusRoutes = await response.json();
         console.log('Bus routes loaded:', mockBusRoutes);
-        // Initialize the application after data is loaded
-        showHomepage(); // Show homepage only after data is ready
+        // Initial page setup is handled by handleLocation now, not directly showHomepage()
     } catch (error) {
         console.error('Could not fetch bus routes:', error);
-        // Optionally display an error message to the user
         alert('Failed to load bus route data. Please try refreshing the page.');
     }
 }
 
-// Get references to HTML elements
 const homepage = document.getElementById('homepage');
 const detailPage = document.getElementById('detail-page');
-const busNetworkPage = document.getElementById('bus-network-page'); // New bus network page element
-const aboutPage = document.getElementById('about-page'); // New about page element
-const howToPayPage = document.getElementById('how-to-pay-page'); // New how to pay page element
+const busNetworkPage = document.getElementById('bus-network-page');
+const aboutPage = document.getElementById('about-page');
+const howToPayPage = document.getElementById('how-to-pay-page');
 
-// Get references to new header elements
 const mobileMenuButton = document.getElementById('mobile-menu-button');
 const mobileMenu = document.getElementById('mobile-menu');
 
 const searchInputHome = document.getElementById('search-input-home');
 const suggestionsListHome = document.getElementById('suggestions-list-home');
-const clearButtonHome = document.getElementById('clear-button-home'); // New clear button
+const clearButtonHome = document.getElementById('clear-button-home');
 const backButton = document.getElementById('back-button');
-const busNetworkBackButton = document.getElementById('bus-network-back-button'); // New back button for bus network page
-const aboutBackButton = document.getElementById('about-back-button'); // New back button for about page
-const howToPayBackButton = document.getElementById('how-to-pay-back-button'); // New back button for how to pay page
+const busNetworkBackButton = document.getElementById('bus-network-back-button');
+const aboutBackButton = document.getElementById('about-back-button');
+const howToPayBackButton = document.getElementById('how-to-pay-back-button');
 
-// References for route details (table cells)
 const detailRouteNumber = document.getElementById('detail-route-number');
 const detailOriginTable = document.getElementById('detail-origin-table');
 const detailDestinationTable = document.getElementById('detail-destination-table');
-// Reference to the combined stops table body
 const combinedStopsTableBody = document.getElementById('combined-stops-table-body');
-// New LLM feature elements
-const generateDescriptionButton = document.getElementById('generate-description-button');
-const routeDescriptionOutput = document.getElementById('route-description-output');
-const descriptionText = document.getElementById('description-text');
-const loadingIndicator = document.getElementById('loading-indicator');
 
 const searchInputDetail = document.getElementById('search-input-detail');
 const suggestionsListDetail = document.getElementById('suggestions-list-detail');
-const clearButtonDetail = document.getElementById('clear-button-detail'); // New clear button
+const clearButtonDetail = document.getElementById('clear-button-detail');
 
-const busNetworkTableBody = document.getElementById('bus-network-table-body'); // Table body for bus network
+const busNetworkTableBody = document.getElementById('bus-network-table-body');
 
+let currentRoute = null;
 
-let currentRoute = null; // To store the currently displayed route
+// --- BASE PATH CONFIGURATION (for GitHub Pages or Subdirectory Hosting) ---
+// IMPORTANT: Replace 'your-repo-name' with your actual GitHub repository name if hosting there.
+// If hosting at the root of a domain (e.g., Firebase, Netlify, custom domain), set to '' or '/'
+const BASE_PATH = ''; // Example for root domain hosting (e.g., Firebase)
+// const BASE_PATH = '/your-repo-name'; // Example for GitHub Pages project repo
+
+// Helper function to create URL paths with the base path
+function getPath(path) {
+    // Ensure path starts with a slash relative to BASE_PATH
+    return `${BASE_PATH}${path.startsWith('/') ? path : '/' + path}`;
+}
 
 // Function to toggle mobile menu visibility
 function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobile-menu');
     const body = document.body;
 
-    if (mobileMenu.classList.contains('hidden')) {
-        // Menu is currently hidden, so show it
-        mobileMenu.classList.remove('hidden');
-        body.classList.add('overflow-hidden'); // Add overflow-hidden when menu opens
+    // Toggle the 'mobile-menu-active' class to show/hide
+    if (mobileMenu.classList.contains('mobile-menu-active')) {
+        // Menu is currently active, so hide it
+        mobileMenu.classList.remove('mobile-menu-active');
+        body.classList.remove('overflow-hidden'); // Allow scrolling again
     } else {
-        // Menu is currently visible, so hide it
-        mobileMenu.classList.add('hidden');
-        body.classList.remove('overflow-hidden'); // Always remove overflow-hidden when menu closes
+        // Menu is currently hidden, so show it
+        mobileMenu.classList.add('mobile-menu-active');
+        body.classList.add('overflow-hidden'); // Prevent scrolling body when menu is open
     }
 }
 
-// Function to show the homepage and hide other pages
+// Function to show the homepage and hide other pages, handles history pushState
 function showHomepage(fromPopState = false) {
     if (!fromPopState) {
-        history.pushState({ page: 'homepage' }, '', '/');
+        history.pushState({ page: 'homepage' }, '', getPath('/'));
     }
     homepage.style.display = 'flex';
     detailPage.style.display = 'none';
@@ -239,10 +234,10 @@ function showHomepage(fromPopState = false) {
     console.log('Showing homepage');
 }
 
-// Function to show the detail page and hide other pages
+// Function to show the detail page, handles history pushState
 function showDetailPage(route, fromPopState = false) {
     if (!fromPopState) {
-        history.pushState({ page: 'detail', routeNumber: route.number }, '', `/layanan-bus/${route.number}`);
+        history.pushState({ page: 'detail', routeNumber: route.number }, '', getPath(`/layanan-bus/${route.number}`));
     }
     homepage.style.display = 'none';
     detailPage.style.display = 'block';
@@ -259,10 +254,10 @@ function showDetailPage(route, fromPopState = false) {
     console.log('Showing detail page for route:', route.number);
 }
 
-// Function to show the bus network page and hide other pages
+// Function to show the bus network page, handles history pushState
 function showBusNetworkPage(fromPopState = false) {
     if (!fromPopState) {
-        history.pushState({ page: 'busNetwork' }, '', '/rute-bus');
+        history.pushState({ page: 'busNetwork' }, '', getPath('/rute-bus'));
     }
     homepage.style.display = 'none';
     detailPage.style.display = 'none';
@@ -275,10 +270,10 @@ function showBusNetworkPage(fromPopState = false) {
     console.log('Showing bus network page');
 }
 
-// Function to show the about page and hide other pages
+// Function to show the about page, handles history pushState
 function showAboutPage(fromPopState = false) {
     if (!fromPopState) {
-        history.pushState({ page: 'about' }, '', '/tentang');
+        history.pushState({ page: 'about' }, '', getPath('/tentang'));
     }
     homepage.style.display = 'none';
     detailPage.style.display = 'none';
@@ -290,10 +285,10 @@ function showAboutPage(fromPopState = false) {
     console.log('Showing about page');
 }
 
-// Function to show the how to pay page and hide other pages
+// Function to show the how to pay page, handles history pushState
 function showHowToPayPage(fromPopState = false) {
     if (!fromPopState) {
-        history.pushState({ page: 'howToPay' }, '', '/cara-naik');
+        history.pushState({ page: 'howToPay' }, '', getPath('/cara-naik'));
     }
     homepage.style.display = 'none';
     detailPage.style.display = 'none';
@@ -305,9 +300,42 @@ function showHowToPayPage(fromPopState = false) {
     console.log('Showing how to pay page');
 }
 
-// Function to populate the bus network table
+
+// Function to handle showing different pages based on the URL
+function handleLocation() {
+    const path = window.location.pathname;
+    // Remove BASE_PATH from the beginning of the path for routing logic
+    const relativePath = path.startsWith(BASE_PATH) ? path.substring(BASE_PATH.length) : path;
+
+    console.log('Handling location:', path, 'Relative path:', relativePath);
+
+    if (relativePath.startsWith('/layanan-bus/')) {
+        const busNumber = relativePath.replace('/layanan-bus/', '');
+        const route = mockBusRoutes.find(r => r.number === busNumber);
+        if (route) {
+            showDetailPage(route, true); // Pass true to indicate it's from a popstate or direct URL
+        } else {
+            console.warn(`Bus route ${busNumber} not found. Redirecting to homepage.`);
+            showHomepage(true); // Treat as popstate so it doesn't add a new history entry
+        }
+    } else if (relativePath === '/cara-naik') {
+        showHowToPayPage(true);
+    } else if (relativePath === '/rute-bus') {
+        showBusNetworkPage(true);
+    } else if (relativePath === '/tentang') {
+        showAboutPage(true);
+    } else if (relativePath === '/' || relativePath === '') { // Handle root path
+        showHomepage(true);
+    } else {
+        // Fallback for unknown paths (e.g., 404 behavior)
+        console.warn('Unknown path, redirecting to homepage:', relativePath);
+        showHomepage(true); // Redirect to homepage for unknown paths
+    }
+}
+
+
 function populateBusNetworkTable() {
-    busNetworkTableBody.innerHTML = ''; // Clear existing rows
+    busNetworkTableBody.innerHTML = '';
     console.log('Attempting to populate bus network table. Current mockBusRoutes state:', mockBusRoutes);
 
     if (mockBusRoutes && mockBusRoutes.length > 0) {
@@ -317,20 +345,20 @@ function populateBusNetworkTable() {
             const routeNameCell = document.createElement('td');
 
             const busNumberLink = document.createElement('a');
-            busNumberLink.href = "#"; // Prevent default navigation
+            busNumberLink.href = getPath(`/layanan-bus/${route.number}`); // Use getPath here
             busNumberLink.textContent = route.number;
             busNumberLink.onclick = (event) => {
-                event.preventDefault(); // Stop default link behavior
-                showDetailPage(route);
+                event.preventDefault();
+                showDetailPage(route, false); // Explicitly state not from popstate
             };
             busNumberCell.appendChild(busNumberLink);
 
             const routeNameLink = document.createElement('a');
-            routeNameLink.href = "#"; // Prevent default navigation
+            routeNameLink.href = getPath(`/layanan-bus/${route.number}`); // Use getPath here
             routeNameLink.textContent = `${route.origin} ⇆ ${route.destination}`;
             routeNameLink.onclick = (event) => {
-                event.preventDefault(); // Stop default link behavior
-                showDetailPage(route);
+                event.preventDefault();
+                showDetailPage(route, false); // Explicitly state not from popstate
             };
             routeNameCell.appendChild(routeNameLink);
 
@@ -344,48 +372,38 @@ function populateBusNetworkTable() {
         row.innerHTML = `<td colspan="2" class="text-center py-4 text-gray-500">Loading bus network data... Please wait.</td>`;
         busNetworkTableBody.appendChild(row);
         console.log('Bus routes not yet available, showing loading message.');
-        // If data is not yet loaded, try again after a short delay
-        // This handles cases where the user clicks before the fetch completes
-        if (mockBusRoutes.length === 0) { // Only re-try if it's truly empty
-            setTimeout(populateBusNetworkTable, 500); // Try again after 500ms
+        if (mockBusRoutes.length === 0) {
+            setTimeout(populateBusNetworkTable, 500);
         }
     }
 }
 
-// Function to display route details on the detail page
-async function displayRouteDetails(route) { // Made async to await walking connections
-    // Populate the route detail table cells
+async function displayRouteDetails(route) {
     detailRouteNumber.textContent = route.number;
     detailOriginTable.textContent = route.origin;
     detailDestinationTable.textContent = route.destination;
 
-    // Clear previous stops in the combined table
     combinedStopsTableBody.innerHTML = '';
 
     const outboundStops = route.stops.outbound;
     const inboundStops = route.stops.inbound;
 
-    // Add the first stop (Origin) row for the overall route
     if (outboundStops.length > 0) {
         const firstOverallRow = document.createElement('tr');
         firstOverallRow.classList.add('edge', 'loop');
-        const originStopData = outboundStops[0]; // Get the full stop object
+        const originStopData = outboundStops[0];
         const originCell = document.createElement('td');
         originCell.setAttribute('colspan', '3');
         originCell.classList.add('stop-start');
-        originCell.textContent = originStopData.name; // Use .name
+        originCell.textContent = originStopData.name;
 
-        // Add transfers if available for origin
         if (originStopData.transfers && originStopData.transfers.length > 0) {
-            // Separate bus transfers from other types
             const busTransfers = originStopData.transfers.filter(t => t.type === 'Bus');
             const otherTransfers = originStopData.transfers.filter(t => t.type !== 'Bus');
 
-            // Handle Bus transfers (on one line)
             if (busTransfers.length > 0) {
                 const busTransferDiv = document.createElement('div');
                 busTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                //busTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                 busTransfers.forEach((transfer, index) => {
                     const icon = getTransferIcon(transfer.type);
@@ -394,7 +412,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                     }
 
                     const transferLink = document.createElement('a');
-                    transferLink.href = "#";
+                    transferLink.href = getPath(`/layanan-bus/${transfer.line}`); // Use getPath here
                     transferLink.textContent = transfer.line;
                     const targetRoute = mockBusRoutes.find(r => r.number === transfer.line);
 
@@ -408,13 +426,13 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                         console.warn(`Color information not found for bus line: ${transfer.line}. Using default colors.`);
                     }
                     transferLink.classList.add(
-                        'font-semibold', 
-                        'hover:underline', 
-                        'inline-flex', 
+                        'font-semibold',
+                        'hover:underline',
+                        'inline-flex',
                         'items-center',
-                        'justify-center', 
-                        'w-auto', 
-                        'min-w-4', 
+                        'justify-center',
+                        'w-auto',
+                        'min-w-4',
                         'h-4',
                         'p-1',
                         'mb-1',
@@ -426,7 +444,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                         event.preventDefault();
                         const targetRoute = mockBusRoutes.find(r => r.number === transfer.line);
                         if (targetRoute) {
-                            showDetailPage(targetRoute);
+                            showDetailPage(targetRoute, false); // Explicitly state not from popstate
                         } else {
                             alert(`Informasi bus ${transfer.line} belum tersedia.`);
                         }
@@ -434,17 +452,15 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                     busTransferDiv.appendChild(transferLink);
 
                     if (index < busTransfers.length - 1) {
-                        busTransferDiv.appendChild(document.createTextNode(' ')); // Add a space between bus transfers
+                        busTransferDiv.appendChild(document.createTextNode(' '));
                     }
                 });
                 originCell.appendChild(busTransferDiv);
             }
 
-            // Handle other transfer types (each on a new line)
             otherTransfers.forEach(transfer => {
                 const otherTransferDiv = document.createElement('div');
                 otherTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                //otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                 const icon = getTransferIcon(transfer.type);
                 if (icon) {
@@ -463,55 +479,42 @@ async function displayRouteDetails(route) { // Made async to await walking conne
         combinedStopsTableBody.appendChild(firstOverallRow);
     }
 
-    // Reverse inbound stops for display
-    const reversedInboundStops = [...inboundStops].reverse(); // Create a copy to avoid modifying original array
-
-    // Determine the maximum number of intermediate rows needed
-    // We need to account for the first and last stops being handled separately
+    const reversedInboundStops = [...inboundStops].reverse();
     const effectiveOutboundLength = outboundStops.length > 1 ? outboundStops.length - 2 : 0;
     const effectiveInboundLength = inboundStops.length > 1 ? inboundStops.length - 2 : 0;
     const maxIntermediateLength = Math.max(effectiveOutboundLength, effectiveInboundLength);
 
 
-    // Add intermediate stops
     for (let i = 0; i < maxIntermediateLength; i++) {
         const row = document.createElement('tr');
-        row.classList.add('intermediate-row'); // Add a class for alternating background
+        row.classList.add('intermediate-row');
 
-        // Outbound stop cell (first column)
         const outboundCell = document.createElement('td');
-        outboundCell.classList.add('intermediate-line'); // Always add line background
+        outboundCell.classList.add('intermediate-line');
 
-        // Check if the stop exists and is not the first or last stop of its respective list
         const currentOutboundStopData = outboundStops[i + 1];
         const outboundStopName = currentOutboundStopData ? currentOutboundStopData.name : '';
 
-        // Inbound stop cell (third column) - moved up to get inboundStopName for comparison
         const inboundCell = document.createElement('td');
-        inboundCell.classList.add('intermediate-line'); // Always add line background
+        inboundCell.classList.add('intermediate-line');
         const currentInboundStopData = reversedInboundStops[i + 1];
         const inboundStopName = currentInboundStopData ? currentInboundStopData.name : '';
-        
-        if (outboundStopName !== '') { // Simplified condition
-            // Apply conditional class based on name equality
+
+        if (outboundStopName !== '') {
             if (outboundStopName === inboundStopName) {
-                outboundCell.classList.add('outbound-brt'); // Use outbound-stop-brt if names are same
+                outboundCell.classList.add('outbound-brt');
             } else {
-                outboundCell.classList.add('stop-cell'); // Use existing css if names are different
+                outboundCell.classList.add('stop-cell');
             }
             outboundCell.appendChild(document.createTextNode(outboundStopName));
 
-            // Add transfers if available for outbound intermediate stop
             if (currentOutboundStopData.transfers && currentOutboundStopData.transfers.length > 0) {
-                // Separate bus transfers from other types
                 const busTransfers = currentOutboundStopData.transfers.filter(t => t.type === 'Bus');
                 const otherTransfers = currentOutboundStopData.transfers.filter(t => t.type !== 'Bus');
 
-                // Handle Bus transfers (on one line)
                 if (busTransfers.length > 0) {
                     const busTransferDiv = document.createElement('div');
                     busTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                    //busTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                     busTransfers.forEach((transfer, index) => {
                         const icon = getTransferIcon(transfer.type);
@@ -520,7 +523,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                         }
 
                         const transferLink = document.createElement('a');
-                        transferLink.href = "#";
+                        transferLink.href = getPath(`/layanan-bus/${transfer.line}`); // Use getPath here
                         transferLink.textContent = transfer.line;
                         const targetRoute = mockBusRoutes.find(r => r.number === transfer.line);
 
@@ -534,16 +537,16 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                             console.warn(`Color information not found for bus line: ${transfer.line}. Using default colors.`);
                         }
                         transferLink.classList.add(
-                            'hover:underline', 
-                            'inline-flex', 
-                            'items-center', 
+                            'hover:underline',
+                            'inline-flex',
+                            'items-center',
                             'justify-center',
-                            'w-auto', 
-                            'min-w-4', 
+                            'w-auto',
+                            'min-w-4',
                             'h-4',
                             'p-1',
                             'mb-1',
-                            'rounded-full', 
+                            'rounded-full',
                             'text-xs',
                         );
                         transferLink.style.backgroundColor = bgColor;
@@ -552,7 +555,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                             event.preventDefault();
                             const targetRoute = mockBusRoutes.find(r => r.number === transfer.line);
                             if (targetRoute) {
-                                showDetailPage(targetRoute);
+                                showDetailPage(targetRoute, false); // Explicitly state not from popstate
                             } else {
                                 alert(`Informasi bus ${transfer.line} belum tersedia.`);
                             }
@@ -566,11 +569,9 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                     outboundCell.appendChild(busTransferDiv);
                 }
 
-                // Handle other transfer types (each on a new line)
                 otherTransfers.forEach(transfer => {
                     const otherTransferDiv = document.createElement('div');
                     otherTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                    //otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                     const icon = getTransferIcon(transfer.type);
                     if (icon) {
@@ -578,7 +579,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                     }
 
                     const span = document.createElement('span');
-                    span.className = 'font-semibold text-blue-600'; // Or other appropriate styling
+                    span.className = 'font-semibold text-blue-600';
                     span.textContent = transfer.line;
                     otherTransferDiv.appendChild(span);
 
@@ -588,43 +589,33 @@ async function displayRouteDetails(route) { // Made async to await walking conne
         } else if (currentOutboundStopData && currentOutboundStopData.name === '') {
             outboundCell.appendChild(document.createTextNode(''));
         }
-        //row.appendChild(outboundCell);
-
-        // Middle empty cell
         const middleCell = document.createElement('td');
-        
-        if (outboundStopName === '' || inboundStopName === '') {
-            middleCell.classList.add('opposite'); // Use existing opposite class
-        } else if (outboundStopName === inboundStopName) {
-            middleCell.classList.add('solid-line'); // Add a class for solid horizontal line
-        } else if (areBusStopsWalkingDistance(outboundStopName, inboundStopName)) { //
-            middleCell.classList.add('dotted-line'); // Add a class for dotted horizontal line
-        } else {
-            middleCell.classList.add('opposite'); // Fallback if no connection
-        }
-        // row.appendChild(middleCell);
 
-        // Inbound stop cell (third column)
-        if (inboundStopName !== '') { // Simplified condition
-            // Apply conditional class based on name equality
+        if (outboundStopName === '' || inboundStopName === '') {
+            middleCell.classList.add('opposite');
+        } else if (outboundStopName === inboundStopName) {
+            middleCell.classList.add('solid-line');
+        } else if (areBusStopsWalkingDistance(outboundStopName, inboundStopName)) {
+            middleCell.classList.add('dotted-line');
+        } else {
+            middleCell.classList.add('opposite');
+        }
+
+        if (inboundStopName !== '') {
             if (outboundStopName === inboundStopName) {
-                inboundCell.classList.add('inbound-brt'); // Use outbound-stop-brt if names are same
+                inboundCell.classList.add('inbound-brt');
             } else {
-                inboundCell.classList.add('stop-cell'); // Use existing css if names are different
+                inboundCell.classList.add('stop-cell');
             }
             inboundCell.appendChild(document.createTextNode(inboundStopName));
 
-            // Add transfers if available for inbound intermediate stop
             if (currentInboundStopData.transfers && currentInboundStopData.transfers.length > 0) {
-                                        // Separate bus transfers from other types
                 const busTransfers = currentInboundStopData.transfers.filter(t => t.type === 'Bus');
                 const otherTransfers = currentInboundStopData.transfers.filter(t => t.type !== 'Bus');
 
-                // Handle Bus transfers (on one line)
                 if (busTransfers.length > 0) {
                     const busTransferDiv = document.createElement('div');
                     busTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                    //busTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                     busTransfers.forEach((transfer, index) => {
                         const icon = getTransferIcon(transfer.type);
@@ -633,7 +624,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                         }
 
                         const transferLink = document.createElement('a');
-                        transferLink.href = "#";
+                        transferLink.href = getPath(`/layanan-bus/${transfer.line}`); // Use getPath here
                         transferLink.textContent = transfer.line;
                         const targetRoute = mockBusRoutes.find(r => r.number === transfer.line);
 
@@ -647,16 +638,16 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                             console.warn(`Color information not found for bus line: ${transfer.line}. Using default colors.`);
                         }
                         transferLink.classList.add(
-                            'hover:underline', 
-                            'inline-flex', 
-                            'items-center', 
+                            'hover:underline',
+                            'inline-flex',
+                            'items-center',
                             'justify-center',
-                            'w-auto', 
-                            'min-w-4', 
+                            'w-auto',
+                            'min-w-4',
                             'h-4',
-                            'p-1', 
+                            'p-1',
                             'mb-1',
-                            'rounded-full', 
+                            'rounded-full',
                             'text-xs',
                         );
                         transferLink.style.backgroundColor = bgColor;
@@ -665,7 +656,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                             event.preventDefault();
                             const targetRoute = mockBusRoutes.find(r => r.number === transfer.line);
                             if (targetRoute) {
-                                showDetailPage(targetRoute);
+                                showDetailPage(targetRoute, false); // Explicitly state not from popstate
                             } else {
                                 alert(`Informasi bus ${transfer.line} belum tersedia.`);
                             }
@@ -679,11 +670,9 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                     inboundCell.appendChild(busTransferDiv);
                 }
 
-                // Handle other transfer types (each on a new line)
                 otherTransfers.forEach(transfer => {
                     const otherTransferDiv = document.createElement('div');
                     otherTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                    //otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                     const icon = getTransferIcon(transfer.type);
                     if (icon) {
@@ -691,7 +680,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                     }
 
                     const span = document.createElement('span');
-                    span.className = 'font-semibold text-blue-600'; // Or other appropriate styling
+                    span.className = 'font-semibold text-blue-600';
                     span.textContent = transfer.line;
                     otherTransferDiv.appendChild(span);
 
@@ -708,28 +697,22 @@ async function displayRouteDetails(route) { // Made async to await walking conne
         combinedStopsTableBody.appendChild(row);
     }
 
-    // Add the last stop (Destination) row for the overall route
-    if (outboundStops.length > 0) { // Check outboundStops for the actual destination object
+    if (outboundStops.length > 0) {
         const lastOverallRow = document.createElement('tr');
         lastOverallRow.classList.add('edge', 'loop');
-        // Correctly get the destination stop data from the outbound stops array
         const destinationStopData = outboundStops[outboundStops.length - 1];
         const destinationCell = document.createElement('td');
         destinationCell.setAttribute('colspan', '3');
         destinationCell.classList.add('stop-end');
-        destinationCell.textContent = destinationStopData.name; // Use .name
+        destinationCell.textContent = destinationStopData.name;
 
-        // Add transfers if available for destination
         if (destinationStopData.transfers && destinationStopData.transfers.length > 0) {
-            // Separate bus transfers from other types
             const busTransfers = destinationStopData.transfers.filter(t => t.type === 'Bus');
             const otherTransfers = destinationStopData.transfers.filter(t => t.type !== 'Bus');
 
-            // Handle Bus transfers (on one line)
             if (busTransfers.length > 0) {
                 const busTransferDiv = document.createElement('div');
                 busTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                //busTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                 busTransfers.forEach((transfer, index) => {
                     const icon = getTransferIcon(transfer.type);
@@ -738,7 +721,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                     }
 
                     const transferLink = document.createElement('a');
-                    transferLink.href = "#";
+                    transferLink.href = getPath(`/layanan-bus/${transfer.line}`); // Use getPath here
                     transferLink.textContent = transfer.line;
                     const targetRoute = mockBusRoutes.find(r => r.number === transfer.line);
 
@@ -752,15 +735,15 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                         console.warn(`Color information not found for bus line: ${transfer.line}. Using default colors.`);
                     }
                     transferLink.classList.add(
-                        'font-semibold', 
-                        'hover:underline', 
-                        'inline-flex', 
+                        'font-semibold',
+                        'hover:underline',
+                        'inline-flex',
                         'items-center',
-                        'justify-center', 
-                        'w-auto', 
-                        'min-w-4', 
+                        'justify-center',
+                        'w-auto',
+                        'min-w-4',
                         'h-4',
-                        'p-1', 
+                        'p-1',
                         'mb-1',
                         'rounded-full',
                     );
@@ -770,7 +753,7 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                         event.preventDefault();
                         const targetRoute = mockBusRoutes.find(r => r.number === transfer.line);
                         if (targetRoute) {
-                            showDetailPage(targetRoute);
+                            showDetailPage(targetRoute, false); // Explicitly state not from popstate
                         } else {
                             alert(`Informasi bus ${transfer.line} belum tersedia.`);
                         }
@@ -778,17 +761,15 @@ async function displayRouteDetails(route) { // Made async to await walking conne
                     busTransferDiv.appendChild(transferLink);
 
                     if (index < busTransfers.length - 1) {
-                        busTransferDiv.appendChild(document.createTextNode(' ')); // Add a space between bus transfers
+                        busTransferDiv.appendChild(document.createTextNode(' '));
                     }
                 });
                 destinationCell.appendChild(busTransferDiv);
             }
 
-            // Handle other transfer types (each on a new line)
             otherTransfers.forEach(transfer => {
                 const otherTransferDiv = document.createElement('div');
                 otherTransferDiv.classList.add('text-xs', 'text-gray-500', 'mt-1');
-                //otherTransferDiv.appendChild(document.createTextNode('Transit ke '));
 
                 const icon = getTransferIcon(transfer.type);
                 if (icon) {
@@ -808,25 +789,21 @@ async function displayRouteDetails(route) { // Made async to await walking conne
     }
 }
 
-// Function to filter and display suggestions
 function updateSuggestions(searchTerm, suggestionsListElement, isHomePage) {
-    suggestionsListElement.innerHTML = ''; // Clear previous suggestions
+    suggestionsListElement.innerHTML = '';
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     const routesToDisplay = [];
 
-    // Iterate through all mockBusRoutes to find matches
     mockBusRoutes.forEach(route => {
-        // Check if route number, origin, or destination matches
         if (route.number.toLowerCase().includes(lowerCaseSearchTerm) ||
             route.origin.toLowerCase().includes(lowerCaseSearchTerm) ||
             route.destination.toLowerCase().includes(lowerCaseSearchTerm)) {
             routesToDisplay.push(route);
-            return; // Move to the next route once a match is found
+            return;
         }
 
-        // Check if any stop name in inbound or outbound directions matches
         const stops = [...route.stops.inbound, ...route.stops.outbound];
-        const stopMatches = stops.some(stop => 
+        const stopMatches = stops.some(stop =>
             stop.name && stop.name.toLowerCase().includes(lowerCaseSearchTerm)
         );
 
@@ -845,12 +822,11 @@ function updateSuggestions(searchTerm, suggestionsListElement, isHomePage) {
                 if (isHomePage) {
                     searchInputHome.value = li.textContent;
                     suggestionsListHome.classList.add('hidden');
-                    showDetailPage(route);
+                    showDetailPage(route, false); // Explicitly state not from popstate
                 } else {
                     searchInputDetail.value = li.textContent;
                     suggestionsListDetail.classList.add('hidden');
-                    // Directly call showDetailPage for the selected route
-                    showDetailPage(route);
+                    showDetailPage(route, false); // Explicitly state not from popstate
                 }
             });
             suggestionsListElement.appendChild(li);
@@ -860,7 +836,6 @@ function updateSuggestions(searchTerm, suggestionsListElement, isHomePage) {
     }
 }
 
-// Function to toggle clear button visibility
 function toggleClearButton(inputElement, buttonElement) {
     if (inputElement.value.length > 0) {
         buttonElement.classList.remove('hidden');
@@ -869,146 +844,123 @@ function toggleClearButton(inputElement, buttonElement) {
     }
 }
 
-
-// Event listener for input on the homepage search bar
 searchInputHome.addEventListener('input', (event) => {
     updateSuggestions(event.target.value, suggestionsListHome, true);
-    toggleClearButton(searchInputHome, clearButtonHome); // Toggle clear button visibility
+    toggleClearButton(searchInputHome, clearButtonHome);
 });
 
-// Event listener for focus on the homepage search bar
 searchInputHome.addEventListener('focus', () => {
-    updateSuggestions('', suggestionsListHome, true); // Pass empty string to show all
-    toggleClearButton(searchInputHome, clearButtonHome); // Toggle clear button visibility
+    updateSuggestions('', suggestionsListHome, true);
+    toggleClearButton(searchInputHome, clearButtonHome);
 });
 
-// Event listener for the homepage clear button
 clearButtonHome.addEventListener('click', () => {
     searchInputHome.value = '';
     suggestionsListHome.classList.add('hidden');
     clearButtonHome.classList.add('hidden');
-    searchInputHome.focus(); // Keep focus on search input after clearing
+    searchInputHome.focus();
 });
 
-
-    // Event listener for input on the detail page search bar
 searchInputDetail.addEventListener('input', (event) => {
     updateSuggestions(event.target.value, suggestionsListDetail, false);
-    toggleClearButton(searchInputDetail, clearButtonDetail); // Toggle clear button visibility
+    toggleClearButton(searchInputDetail, clearButtonDetail);
 });
 
-// Event listener for focus on the detail page search bar
 searchInputDetail.addEventListener('focus', () => {
-    updateSuggestions('', suggestionsListDetail, false); // Pass empty string to show all
-    toggleClearButton(searchInputDetail, clearButtonDetail); // Toggle clear button visibility
+    updateSuggestions('', suggestionsListDetail, false);
+    toggleClearButton(searchInputDetail, clearButtonDetail);
 });
 
-// Event listener for the detail page clear button
 clearButtonDetail.addEventListener('click', () => {
     searchInputDetail.value = '';
     suggestionsListDetail.classList.add('hidden');
     clearButtonDetail.classList.add('hidden');
-    searchInputDetail.focus(); // Keep focus on search input after clearing
+    searchInputDetail.focus();
 });
 
-
-// Event listener for clicking outside the suggestions list to hide it (Homepage)
 document.addEventListener('click', (event) => {
     if (!searchInputHome.contains(event.target) && !suggestionsListHome.contains(event.target) && !clearButtonHome.contains(event.target)) {
         suggestionsListHome.classList.add('hidden');
         clearButtonHome.classList.add('hidden');
     }
-        // Event listener for clicking outside the suggestions list to hide it (Detail Page)
     if (!searchInputDetail.contains(event.target) && !suggestionsListDetail.contains(event.target) && !clearButtonDetail.contains(event.target)) {
         suggestionsListDetail.classList.add('hidden');
         clearButtonDetail.classList.add('hidden');
     }
 });
 
+// IMPORTANT: Modify your back buttons to use history.back()
+backButton.addEventListener('click', () => history.back());
+busNetworkBackButton.addEventListener('click', () => history.back());
+aboutBackButton.addEventListener('click', () => history.back());
+howToPayBackButton.addEventListener('click', () => history.back());
 
-// Event listener for the back button (on detail page)
-backButton.addEventListener('click', showHomepage);
-
-// Event listener for the back button (on bus network page)
-busNetworkBackButton.addEventListener('click', showHomepage);
-
-// Event listener for the back button (on about page)
-aboutBackButton.addEventListener('click', showHomepage);
-
-// Event listener for the back button (on how to pay page)
-howToPayBackButton.addEventListener('click', showHomepage);
-
-// Event listener for hamburger button
 mobileMenuButton.addEventListener('click', toggleMobileMenu);
 
-// Add event listeners to mobile menu links to close the menu after click
 document.querySelectorAll('#mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
+    link.addEventListener('click', (event) => { // Added event parameter
+        event.preventDefault(); // Prevent default link behavior
+        const path = event.target.getAttribute('href'); // Get the href attribute
+        // Determine which show function to call based on the path
+        if (path.includes('cara-naik')) {
+            showHowToPayPage(false);
+        } else if (path.includes('rute-bus')) {
+            showBusNetworkPage(false);
+        } else if (path.includes('tentang')) {
+            showAboutPage(false);
+        }
+        toggleMobileMenu(); // Close mobile menu after navigation
     });
 });
 
-// Call fetchMockBusRoutes and loadWalkingConnections when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', async () => { // Make DOMContentLoaded handler async
-    await Promise.all([ //
-        fetchMockBusRoutes(), //
-        loadWalkingConnections() //
+// Event listener for browser's back/forward buttons
+window.addEventListener('popstate', handleLocation);
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await Promise.all([
+        fetchMockBusRoutes(),
+        loadWalkingConnections()
     ]);
-    // Any initial page setup that depends on both datasets can go here.
-    // showHomepage() is already called within fetchMockBusRoutes() for initial display.
+    handleLocation(); // Call handleLocation on initial page load
 });
 
-/**
- * Determines if two *different* bus stop names are considered "walking distance" apart.
- * This function now uses the globally loaded `walkingConnectionsData`.
- *
- * @param {string} stop1Name The name of the first bus stop.
- * @param {string} stop2Name The name of the second bus stop.
- * @returns {boolean} True if the two stops are considered walking distance, false otherwise.
- */
-function areBusStopsWalkingDistance(stop1Name, stop2Name) { //
-    if (!walkingConnectionsData || Object.keys(walkingConnectionsData).length === 0) { //
-        console.warn("Walking connections data not loaded or empty."); //
-        return false; //
+function areBusStopsWalkingDistance(stop1Name, stop2Name) {
+    if (!walkingConnectionsData || Object.keys(walkingConnectionsData).length === 0) {
+        console.warn("Walking connections data not loaded or empty.");
+        return false;
     }
 
-    const normalizedStop1 = stop1Name.trim(); //
-    const normalizedStop2 = stop2Name.trim(); //
+    const normalizedStop1 = stop1Name.trim();
+    const normalizedStop2 = stop2Name.trim();
 
-    // Check if stop1 is connected to stop2 in the loaded data
-    if (walkingConnectionsData[normalizedStop1] && walkingConnectionsData[normalizedStop1].includes(normalizedStop2)) { //
-        return true; //
+    if (walkingConnectionsData[normalizedStop1] && walkingConnectionsData[normalizedStop1].includes(normalizedStop2)) {
+        return true;
     }
 
-    // Check if stop2 is connected to stop1 (for bidirectional check if not explicitly listed both ways)
     if (walkingConnectionsData[normalizedStop2] && walkingConnectionsData[normalizedStop2].includes(normalizedStop1)) {
         return true;
     }
 
-    return false; //
+    return false;
 }
-// Function to handle showing different pages based on the URL
-function handleLocation() {
-    const path = window.location.pathname;
-
-    // Define your routes and the corresponding functions to show the page
-    if (path.startsWith('/layanan-bus/')) {
-        const busNumber = path.replace('/layanan-bus/', '');
-        const route = mockBusRoutes.find(r => r.number === busNumber);
-        if (route) {
-            showDetailPage(route, true); // Pass true to indicate it's from a direct URL load
-        } else {
-            // Handle case where bus number is not found (e.g., redirect to homepage or show 404)
-            console.warn(`Bus route ${busNumber} not found.`);
-            showHomepage();
+// Event listener for the website name/logo link
+document.getElementById('website-name').querySelector('a').addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent default link behavior
+    showHomepage(false);
+});
+// Event listeners for the desktop navigation menu links
+document.querySelectorAll('header nav ul li a.menu-button').forEach(link => {
+    link.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default link behavior
+        const path = event.target.getAttribute('href');
+        // Route based on path (using getPath for consistency with BASE_PATH if applicable)
+        if (path === getPath('/cara-naik')) {
+            showHowToPayPage(false);
+        } else if (path === getPath('/rute-bus')) {
+            showBusNetworkPage(false);
+        } else if (path === getPath('/tentang')) {
+            showAboutPage(false);
         }
-    } else if (path === '/cara-naik') {
-        showHowToPayPage(true);
-    } else if (path === '/rute-bus') {
-        showBusNetworkPage(true);
-    } else if (path === '/tentang') {
-        showAboutPage(true);
-    } else {
-        showHomepage(true); // Default to homepage
-    }
-}
+    });
+});
+

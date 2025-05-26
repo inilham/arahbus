@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arah Bus</title>
+    <title>Jakbus</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="img/bus-icon.png">
@@ -14,8 +14,11 @@
     <header class="header">
         <div class="container mx-auto flex justify-between items-center relative h-full" style="min-height: 64px;">
             <div>
-                <h1 id="website-name" class="text-2xl font-bold cursor-pointer flex items-center" onclick="showHomepage()">
-                    <img src="img/bus-icon.png" alt="Bus Logo" class="h-6 w-6 mr-2">ArahBus</h1>
+                <h1 id="website-name" class="text-2xl font-bold cursor-pointer flex items-center">
+                    <a href="/" class="flex items-center">
+                        <img src="img/bus-icon.png" alt="Bus Logo" class="h-6 w-6 mr-2">Jakbus
+                    </a>
+                </h1>
                 <p class="text-sm text-gray-600">Informasi Rute Bus Jakarta</p>
             </div>
             <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
@@ -26,9 +29,9 @@
 
             <nav class="hidden md:block">
                 <ul class="flex space-x-4 h-full">
-                    <li><a href="#" class="menu-button" onclick="showHowToPayPage()">Cara Naik</a></li>
-                    <li><a href="#" class="menu-button" onclick="showBusNetworkPage()">Rute Bus</a></li>
-                    <li><a href="#" class="menu-button" onclick="showAboutPage()">Tentang</a></li>
+                    <li><a href="/cara-naik" class="menu-button">Cara Naik</a></li>
+                    <li><a href="/rute-bus" class="menu-button">Rute Bus</a></li>
+                    <li><a href="/tentang" class="menu-button">Tentang</a></li>
                 </ul>
             </nav>
         </div>
@@ -175,7 +178,7 @@
                     Kembali
                 </button>
             </div>
-            <h2 class="text-2xl font-semibold mb-6 text-gray-800">Pilih rute untuk tahu ArahBus</h2>
+            <h2 class="text-2xl font-semibold mb-6 text-gray-800">Pilih rutemu</h2>
             <table class="bus-network-table">
                 <thead>
                     <tr>
@@ -196,20 +199,48 @@
                     Kembali
                 </button>
             </div>
-            <h2 class="text-2xl font-semibold mb-4 text-gray-800">ArahBus: Petunjuk Bus Jakarta Ada di Genggamanmu.</h2>
-            <p class="text-gray-700">
-                Bingung naik bus di Jakarta? <strong>ArahBus</strong> hadir sebagai panduan lengkapmu! Temukan <strong>rute bus tercepat</strong>, <strong>lokasi halte terdekat</strong>, dan <strong>informasi transit</strong> dengan mudah. Rencanakan perjalananmu tanpa ribet, sampai tujuan dengan nyaman.
-            </p>
+            <div class="about-us-container">
+            <h1>Nge-bus di Jakarta? Jakartabus.info Aja!</h1>
+                <p>Halo Jakartans! 👋</p>
+                <p>Selamat datang di <strong>Jakartabus.info</strong>, <em>portal</em> wajib buat kamu yang pengen ngejelajah Jakarta pake bus. Capek nyasar? Bingung rute? Tenang, kita ada di sini buat bikin perjalananmu lebih <strong>gampang dan anti-ribet!</strong></p>
+
+                ---
+
+                <h2>Misi Kita Apa Sih?</h2>
+                <p>Gini lho, misi kita itu simpel: pengen bikin pengalaman naik bus di Jakarta jadi <strong>se-gampang nge-scroll timeline</strong>. Kita percaya, makin banyak yang naik transportasi umum, Jakarta makin asyik dan gak macet-macet amat. Jadi, kita sediain info rute bus yang jelas biar kamu makin semangat buat #NgeBusYuk!</p>
+
+                ---
+
+                <h2>Apa Aja yang Bisa Kamu Temuin di Sini?</h2>
+                <p>Di <strong>Jakartabus.info</strong>, kamu bakal nemuin fitur-fitur kece ini:</p>
+                <ul>
+                    <li><strong>Peta Rute Anti-Nyasar:</strong> Liat deh, setiap rute bus kita gambarin kayak <strong>garis di peta</strong>, lengkap dengan titik-titik halte yang jelas. Jadi, kamu bisa langsung paham busnya lewat mana aja, dari awal sampai akhir.</li>
+                    <li><strong>Info Halte Komplit Banget:</strong> Setiap titik halte itu bukan cuma nama doang. Kita kasih info penting kayak <strong>rute bus lain yang juga berhenti di halte itu</strong>. Jadi, gampang banget deh kalo mau oper bus atau nyari koneksi. Dijamin <em>smooth</em>!</li>
+                    <li><strong>Tampilan Website yang Gak Bikin Pusing:</strong> Kita desain website ini biar <strong>gampang banget dipake</strong>. Tinggal ketik rute atau nama halte yang kamu cari, dan <em>voila!</em> Semua info yang kamu butuhin langsung muncul, bersih dan jelas.</li>
+                </ul>
+
+                ---
+
+                <h2>Visi Kita Kedepannya Gimana?</h2>
+                <p>Kita pengen Jakarta jadi kota yang <strong>super gampang dijelajahin pake transportasi umum yang nyambung semua</strong>. Nah, <strong>Jakartabus.info</strong> ini langkah kecil kita buat mewujudkan visi itu. Kita mau jadi <em>go-to place</em> buat semua info bus di Ibu Kota!</p>
+
+                ---
+
+                <h2>Mau Ngasih Ide atau Curhat?</h2>
+                <p>Ada saran, pertanyaan, atau mungkin mau ngasih <em>feedback</em> biar Jakartabus.info makin keren? Jangan sungkan buat kontak kita ya! <strong>Suara kamu penting banget</strong> buat kita biar bisa terus <em>improve</em> dan jadi lebih baik lagi.</p>
+                <div class="contact-button-wrapper">
+                    <a href="mailto:tahujalanteam@gmail.com?subject=Feedback Jakartabus.info" class="mail-to-button">Kirim Email ke Kami!</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="mobile-menu" class="hidden md:hidden fixed top-[4rem] left-0 right-0 w-full bg-white py-2 flex flex-col items-center space-y-4 z-50 shadow-lg">
-        <a href="#" class="mobile-menu" onclick="showHowToPayPage();">Cara Naik</a>
-        <a href="#" class="mobile-menu" onclick="showBusNetworkPage();">Rute Bus</a>
-        <a href="#" class="mobile-menu" onclick="showAboutPage();">Tentang</a>
+    <div id="mobile-menu" class="fixed top-[4rem] left-0 right-0 w-full bg-white py-2 items-center space-y-4 z-50 shadow-lg">
+        <a href="/cara-naik" class="mobile-menu">Cara Naik</a>
+        <a href="/rute-bus" class="mobile-menu">Rute Bus</a>
+        <a href="/tentang" class="mobile-menu">Tentang</a>
         <button class="absolute -top-2 right-4 text-gray-700 text-2xl" onclick="toggleMobileMenu()">✕</button>
     </div>
-
     <script src="script.js"></script>
 
 </body>

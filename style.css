@@ -500,6 +500,15 @@
     text-decoration: underline;
 }
 /* Style for mobile menu */
+#mobile-menu {
+    display: none;
+}
+
+/* Active state: displayed as flex when 'mobile-menu-active' class is present */
+#mobile-menu.mobile-menu-active {
+    display: flex;
+    flex-direction: column; /* Equivalent to Tailwind's flex-col */
+}
 .mobile-menu {
   display: block;
   padding: 8px 16px; /* Adjusted padding for mobile */
@@ -578,4 +587,80 @@
 .search-instructions .instruction-list li {
     margin-bottom: 0.25rem; /* Space between list items */
 }
+.about-us-container {
+    /* max-width: 960px; /* Lebar maksimum konten */
+    margin: 0 auto; /* Tengahin kontainer */
+    padding: 20px; /* Ruang dalam kontainer */
+    font-family: Arial, sans-serif; /* Jenis font dasar */
+    line-height: 1.6; /* Jarak antar baris teks */
+    color: #333; /* Warna teks utama */
+    background-color: #f9f9f9; /* Warna latar belakang kontainer */
+    border-radius: 8px; /* Sudut membulat */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Efek bayangan */
 
+    /* Tambahan untuk konsistensi font */
+    font-size: 16px; /* Ukuran font dasar untuk teks paragraf */
+    font-weight: normal; /* Bobot font dasar untuk teks paragraf */
+}
+
+/* Styling untuk judul utama */
+.about-us-container h1 {
+    color: #000000;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 32px; /* Ukuran font spesifik untuk h1 */
+    font-weight: bold; /* Bobot font spesifik untuk h1 */
+}
+
+/* Styling untuk sub-judul */
+.about-us-container h2 {
+    color: #000000;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 24px; /* Ukuran font spesifik untuk h2 */
+}
+
+/* Styling untuk paragraf */
+.about-us-container p {
+    margin-bottom: 15px;
+    font-size: 16px; /* Pastikan ukuran font paragraf */
+    font-weight: normal; /* Pastikan bobot font paragraf */
+}
+
+/* Styling untuk daftar (unordered list) */
+.about-us-container ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    font-size: 16px; /* Pastikan ukuran font untuk list */
+    font-weight: normal; /* Pastikan bobot font untuk list */
+}
+
+/* Styling untuk setiap item list */
+.about-us-container li {
+    margin-bottom: 8px;
+    font-size: 16px; /* Pastikan ukuran font untuk list item */
+    font-weight: normal; /* Pastikan bobot font untuk list item */
+}
+/* Styling untuk pembungkus tombol */
+.contact-button-wrapper {
+    text-align: center; /* Agar tombol berada di tengah */
+    margin-top: 30px; /* Jarak dari teks di atasnya */
+}
+
+/* Styling untuk tombol "Mail To" */
+.mail-to-button {
+    display: inline-block; /* Agar bisa diatur padding dan margin */
+    background-color: #28a745; /* Warna latar belakang hijau */
+    color: white; /* Warna teks putih */
+    padding: 12px 25px; /* Ukuran padding */
+    text-decoration: none; /* Hilangkan garis bawah */
+    border-radius: 15px; /* Sudut membulat */
+    font-size: 18px; /* Ukuran font tombol */
+    font-weight: bold; /* Bobot font tombol */
+    transition: background-color 0.3s ease; /* Efek transisi saat hover */
+}
+
+.mail-to-button:hover {
+    background-color: #218838; /* Warna latar belakang saat di-hover */
+}
