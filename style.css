@@ -587,61 +587,6 @@
 .search-instructions .instruction-list li {
     margin-bottom: 0.25rem; /* Space between list items */
 }
-.about-us-container {
-    /* max-width: 960px; /* Lebar maksimum konten */
-    margin: 0 auto; /* Tengahin kontainer */
-    padding: 20px; /* Ruang dalam kontainer */
-    font-family: Arial, sans-serif; /* Jenis font dasar */
-    line-height: 1.6; /* Jarak antar baris teks */
-    color: #333; /* Warna teks utama */
-    background-color: #f9f9f9; /* Warna latar belakang kontainer */
-    border-radius: 8px; /* Sudut membulat */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Efek bayangan */
-
-    /* Tambahan untuk konsistensi font */
-    font-size: 16px; /* Ukuran font dasar untuk teks paragraf */
-    font-weight: normal; /* Bobot font dasar untuk teks paragraf */
-}
-
-/* Styling untuk judul utama */
-.about-us-container h1 {
-    color: #000000;
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 32px; /* Ukuran font spesifik untuk h1 */
-    font-weight: bold; /* Bobot font spesifik untuk h1 */
-}
-
-/* Styling untuk sub-judul */
-.about-us-container h2 {
-    color: #000000;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 24px; /* Ukuran font spesifik untuk h2 */
-}
-
-/* Styling untuk paragraf */
-.about-us-container p {
-    margin-bottom: 15px;
-    font-size: 16px; /* Pastikan ukuran font paragraf */
-    font-weight: normal; /* Pastikan bobot font paragraf */
-}
-
-/* Styling untuk daftar (unordered list) */
-.about-us-container ul {
-    list-style-type: disc;
-    margin-left: 20px;
-    margin-bottom: 15px;
-    font-size: 16px; /* Pastikan ukuran font untuk list */
-    font-weight: normal; /* Pastikan bobot font untuk list */
-}
-
-/* Styling untuk setiap item list */
-.about-us-container li {
-    margin-bottom: 8px;
-    font-size: 16px; /* Pastikan ukuran font untuk list item */
-    font-weight: normal; /* Pastikan bobot font untuk list item */
-}
 /* Styling untuk pembungkus tombol */
 .contact-button-wrapper {
     text-align: center; /* Agar tombol berada di tengah */
@@ -664,3 +609,95 @@
 .mail-to-button:hover {
     background-color: #218838; /* Warna latar belakang saat di-hover */
 }
+/* Styling untuk content */
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.content-table th, .stops-table td {
+    padding: 8px 12px;
+    font-size: 16px;
+    vertical-align: top; /* Align content to top */
+}
+.content-table col.first {
+    width: 30%;
+}
+.content-table col.last {
+    width: 70%;
+}
+.content-table td.stop-cell {
+    position: relative; /* Establish positioning context for ::before */
+    /* Default padding for cells, will be overridden by specific column styles */
+    padding: 0px 12px;
+}
+.content-table td.stop-cell::before { /* Target TD within .edge */
+    pointer-events: none;
+    content: '';
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #6ab04c;
+    background-color: #fff;
+    border-radius: 999px;
+}
+.content-table tr.intermediate-row td:first-child.stop-cell {
+    text-align: right;
+    padding-right: 12px; /* Space for the pseudo-element */
+    padding-left: 12px; /* Standard left padding */
+    vertical-align: top;
+}
+.content-table tr.intermediate-row td:first-child.intermediate-line {
+    border-right: 8px solid #6ab04c;
+}
+.content-table tr.intermediate-row td:first-child.stop-cell::before {
+    left: auto; /* Remove left positioning */
+    right: -9px; /* Position on the right */
+    margin: 0 0 0 10px;
+    top: 25px;
+}
+.content-table tr.intermediate-row td:last-child {
+    text-align: left;
+    padding: 12px; /* Standard left padding */
+    vertical-align: middle;
+}
+/* Styling untuk judul utama */
+.content-table h1 {
+    color: #1d1d1d;
+    text-align: right;
+    margin-bottom: 25px;
+    font-size: 32px; /* Ukuran font spesifik untuk h1 */
+    font-weight: bold; /* Bobot font spesifik untuk h1 */
+}
+
+/* Styling untuk sub-judul */
+.content-table h2 {
+    color: #000000;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 24px; /* Ukuran font spesifik untuk h2 */
+}
+
+/* Styling untuk paragraf */
+.content-table p {
+    margin-bottom: 15px;
+    font-size: 16px; /* Pastikan ukuran font paragraf */
+    font-weight: normal; /* Pastikan bobot font paragraf */
+}
+
+/* Styling untuk daftar (unordered list) */
+.content-table ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    font-size: 16px; /* Pastikan ukuran font untuk list */
+    font-weight: normal; /* Pastikan bobot font untuk list */
+}
+
+/* Styling untuk setiap item list */
+.content-table li {
+    margin-bottom: 8px;
+    font-size: 16px; /* Pastikan ukuran font untuk list item */
+    font-weight: normal; /* Pastikan bobot font untuk list item */
+}
+/* Styling untuk pembungkus tombol */

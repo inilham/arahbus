@@ -5,7 +5,7 @@ function getTransferIcon(type) {
     switch (type) {
         case 'LRT': {
             const img = document.createElement('img');
-            img.src = 'img/lrt-jak-ns.png'; // Assuming relative path works with base tag or for local testing
+            img.src = '/img/lrt-jak-ns.png'; // Assuming relative path works with base tag or for local testing
             img.alt = 'LRT Jakarta Lin Selatan';
             img.width = 16;
             img.height = 16;
@@ -14,7 +14,7 @@ function getTransferIcon(type) {
         };
         case 'LRT-CB': {
             const img = document.createElement('img');
-            img.src = 'img/lrt-cb-line.png';
+            img.src = '/img/lrt-cb-line.png';
             img.alt = 'LRT Jabodebek Lin Cibubur';
             img.width = 16;
             img.height = 16;
@@ -23,7 +23,7 @@ function getTransferIcon(type) {
         };
         case 'LRT-BK': {
             const img = document.createElement('img');
-            img.src = 'img/lrt-bk-line.png';
+            img.src = '/img/lrt-bk-line.png';
             img.alt = 'LRT Jabodebek Lin Bekasi';
             img.width = 16;
             img.height = 16;
@@ -32,7 +32,7 @@ function getTransferIcon(type) {
         };
         case 'MRT': {
             const img = document.createElement('img');
-            img.src = 'img/mrt-ns-line.png';
+            img.src = '/img/mrt-ns-line.png';
             img.alt = 'MRT Icon';
             img.width = 16;
             img.height = 16;
@@ -41,7 +41,7 @@ function getTransferIcon(type) {
         };
         case 'Train': {
             const img = document.createElement('img');
-            img.src = 'img/train-station.png';
+            img.src = '/img/train-station.png';
             img.alt = 'Train Icon';
             img.width = 16;
             img.height = 16;
@@ -50,7 +50,7 @@ function getTransferIcon(type) {
         };
         case 'CL-Airport': {
             const img = document.createElement('img');
-            img.src = 'img/krl-a-line.png';
+            img.src = '/img/krl-a-line.png';
             img.alt = 'KA Bandara Soekarno Hatta';
             img.width = 16;
             img.height = 16;
@@ -59,7 +59,7 @@ function getTransferIcon(type) {
         };
         case 'CL-Bogor': {
             const img = document.createElement('img');
-            img.src = 'img/krl-b-line.png';
+            img.src = '/img/krl-b-line.png';
             img.alt = 'KRL Komuter Lin Bogor';
             img.width = 16;
             img.height = 16;
@@ -68,7 +68,7 @@ function getTransferIcon(type) {
         };
         case 'CL-Cikarang': {
             const img = document.createElement('img');
-            img.src = 'img/krl-c-line.png';
+            img.src = '/img/krl-c-line.png';
             img.alt = 'KRL Komuter Lin Lingkar Cikarang';
             img.width = 16;
             img.height = 16;
@@ -77,7 +77,7 @@ function getTransferIcon(type) {
         };
         case 'CL-Rangkas': {
             const img = document.createElement('img');
-            img.src = 'img/krl-r-line.png';
+            img.src = '/img/krl-r-line.png';
             img.alt = 'KRL Komuter Lin Rangkasbitung';
             img.width = 16;
             img.height = 16;
@@ -86,7 +86,7 @@ function getTransferIcon(type) {
         };
         case 'CL-Tangerang': {
             const img = document.createElement('img');
-            img.src = 'img/krl-t-line.png';
+            img.src = '/img/krl-t-line.png';
             img.alt = 'KRL Komuter Lin Tangerang';
             img.width = 16;
             img.height = 16;
@@ -95,7 +95,7 @@ function getTransferIcon(type) {
         };
         case 'CL-TP': {
             const img = document.createElement('img');
-            img.src = 'img/krl-tp-line.png';
+            img.src = '/img/krl-tp-line.png';
             img.alt = 'KRL Komuter Lin Tanjung Priok';
             img.width = 16;
             img.height = 16;
@@ -104,7 +104,7 @@ function getTransferIcon(type) {
         };
         case 'Airport': {
             const img = document.createElement('img');
-            img.src = 'img/airport.png';
+            img.src = '/img/airport.png';
             img.alt = 'Bandara';
             img.width = 16;
             img.height = 16;
@@ -113,7 +113,7 @@ function getTransferIcon(type) {
         };
         case 'Terminal': {
             const img = document.createElement('img');
-            img.src = 'img/bus-terminal.png';
+            img.src = '/img/bus-terminal.png';
             img.alt = 'Terminal Bus Icon';
             img.width = 16;
             img.height = 16;
