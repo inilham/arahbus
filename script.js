@@ -222,71 +222,86 @@ function toggleMobileMenu() {
 }
 
 // Function to show the homepage and hide other pages
-function showHomepage() {
-    homepage.style.display = 'flex'; // Use flex for homepage layout
+function showHomepage(fromPopState = false) {
+    if (!fromPopState) {
+        history.pushState({ page: 'homepage' }, '', '/');
+    }
+    homepage.style.display = 'flex';
     detailPage.style.display = 'none';
     busNetworkPage.style.display = 'none';
     aboutPage.style.display = 'none';
-    howToPayPage.style.display = 'none'; // Hide how to pay page
+    howToPayPage.style.display = 'none';
     searchInputHome.value = '';
     suggestionsListHome.classList.add('hidden');
     clearButtonHome.classList.add('hidden');
-    mobileMenu.classList.add('hidden'); // Ensure mobile menu is hidden
-    document.body.classList.remove('overflow-hidden'); // Ensure body can scroll
+    mobileMenu.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
     console.log('Showing homepage');
 }
 
 // Function to show the detail page and hide other pages
-function showDetailPage(route) {
+function showDetailPage(route, fromPopState = false) {
+    if (!fromPopState) {
+        history.pushState({ page: 'detail', routeNumber: route.number }, '', `/layanan-bus/${route.number}`);
+    }
     homepage.style.display = 'none';
-    detailPage.style.display = 'block'; // Use block for detail page layout
+    detailPage.style.display = 'block';
     busNetworkPage.style.display = 'none';
     aboutPage.style.display = 'none';
-    howToPayPage.style.display = 'none'; // Hide how to pay page
+    howToPayPage.style.display = 'none';
     currentRoute = route;
     displayRouteDetails(route);
     searchInputDetail.value = '';
     suggestionsListDetail.classList.add('hidden');
     clearButtonDetail.classList.add('hidden');
-    mobileMenu.classList.add('hidden'); // Ensure mobile menu is hidden
-    document.body.classList.remove('overflow-hidden'); // Ensure body can scroll
+    mobileMenu.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
     console.log('Showing detail page for route:', route.number);
 }
 
 // Function to show the bus network page and hide other pages
-function showBusNetworkPage() {
+function showBusNetworkPage(fromPopState = false) {
+    if (!fromPopState) {
+        history.pushState({ page: 'busNetwork' }, '', '/rute-bus');
+    }
     homepage.style.display = 'none';
     detailPage.style.display = 'none';
-    busNetworkPage.style.display = 'block'; // Use block for bus network page layout
+    busNetworkPage.style.display = 'block';
     aboutPage.style.display = 'none';
-    howToPayPage.style.display = 'none'; // Hide how to pay page
+    howToPayPage.style.display = 'none';
     populateBusNetworkTable();
-    mobileMenu.classList.add('hidden'); // Ensure mobile menu is hidden
-    document.body.classList.remove('overflow-hidden'); // Ensure body can scroll
+    mobileMenu.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
     console.log('Showing bus network page');
 }
 
 // Function to show the about page and hide other pages
-function showAboutPage() {
+function showAboutPage(fromPopState = false) {
+    if (!fromPopState) {
+        history.pushState({ page: 'about' }, '', '/tentang');
+    }
     homepage.style.display = 'none';
     detailPage.style.display = 'none';
     busNetworkPage.style.display = 'none';
-    aboutPage.style.display = 'block'; // Show about page
-    howToPayPage.style.display = 'none'; // Hide how to pay page
-    mobileMenu.classList.add('hidden'); // Ensure mobile menu is hidden
-    document.body.classList.remove('overflow-hidden'); // Ensure body can scroll
+    aboutPage.style.display = 'block';
+    howToPayPage.style.display = 'none';
+    mobileMenu.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
     console.log('Showing about page');
 }
 
 // Function to show the how to pay page and hide other pages
-function showHowToPayPage() {
+function showHowToPayPage(fromPopState = false) {
+    if (!fromPopState) {
+        history.pushState({ page: 'howToPay' }, '', '/cara-naik');
+    }
     homepage.style.display = 'none';
     detailPage.style.display = 'none';
     busNetworkPage.style.display = 'none';
     aboutPage.style.display = 'none';
-    howToPayPage.style.display = 'block'; // Show how to pay page
-    mobileMenu.classList.add('hidden'); // Ensure mobile menu is hidden
-    document.body.classList.remove('overflow-hidden'); // Ensure body can scroll
+    howToPayPage.style.display = 'block';
+    mobileMenu.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
     console.log('Showing how to pay page');
 }
 
@@ -971,4 +986,29 @@ function areBusStopsWalkingDistance(stop1Name, stop2Name) { //
     }
 
     return false; //
+}
+// Function to handle showing different pages based on the URL
+function handleLocation() {
+    const path = window.location.pathname;
+
+    // Define your routes and the corresponding functions to show the page
+    if (path.startsWith('/layanan-bus/')) {
+        const busNumber = path.replace('/layanan-bus/', '');
+        const route = mockBusRoutes.find(r => r.number === busNumber);
+        if (route) {
+            showDetailPage(route, true); // Pass true to indicate it's from a direct URL load
+        } else {
+            // Handle case where bus number is not found (e.g., redirect to homepage or show 404)
+            console.warn(`Bus route ${busNumber} not found.`);
+            showHomepage();
+        }
+    } else if (path === '/cara-naik') {
+        showHowToPayPage(true);
+    } else if (path === '/rute-bus') {
+        showBusNetworkPage(true);
+    } else if (path === '/tentang') {
+        showAboutPage(true);
+    } else {
+        showHomepage(true); // Default to homepage
+    }
 }
